@@ -1,0 +1,99 @@
+
+package DAO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import POO.Cliente;
+
+//Implementando Interface IDAO do TIPO Cliente
+
+public class ClienteDAO implements IDAOCliente<Cliente>{
+    
+    //@Override: Sobrescrever o método PAI(Interface)
+    @Override
+    public void inserir(Cliente cliente) throws Exception{
+        //instancia da classe conexao
+        Conexao c = new Conexao();
+        //Define a query que será enviada para o banco de dados
+        String sql="INSERT INTO cliente (nomeCompleto, cpfCnpj, idade, pessoaFisica) VALUES (? ,? ,?)";
+        //Preparando o comando a ser enviado ao banco parssando como
+        //parametro a query e a instancia da classe conexao
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        //Definindo parametro 1 da query sql (?)
+        ps.setString(1, cliente.getNomeCompleto());
+        //Definindo parametro 2 da query sql (?)
+        ps.setString(2, cliente.getCpfCnpj());
+        //Definindo parametro 3 da query sql (?)
+        ps.setInt(3, cliente.getIdade());
+        //Definindo parametro 4 da query sql (?)
+        ps.setBoolean(4, cliente.isPessoaFisica());
+        //Executando o comando no banco de dados
+        ps.execute();
+        //Confirmação da classe conexao (Verificando se tudo funcionou 
+        //execução da query)
+        c.confirmar();
+    }
+    
+    @Override
+    public void alterar(Cliente cliente) throws Exception{
+        Conexao c = new Conexao();
+        String sql="UPDATE cliente SET nomeCompleto=?, cpfCnpj=?, idade=?, pessoaFisica WHERE id_cliente=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setString(1, cliente.getNomeCompleto());
+        ps.setString(2, cliente.getCpfCnpj());
+        ps.setInt(3, cliente.getIdade());
+        ps.setBoolean(4, cliente.isPessoaFisica());
+        ps.setInt(5, cliente.getIdCliente());
+        ps.execute();
+        c.confirmar();
+    }
+    
+    @Override
+    public void excluir(Cliente cliente) throws Exception{
+        Conexao c = new Conexao();
+        String sql = "DELETE FROM cliente WHERE id_cliente=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setInt(1, cliente.getIdCliente());
+        ps.execute();
+        c.confirmar();
+    }
+    
+    @Override
+    public ArrayList<Cliente> listarTodos() throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM cliente ORDER BY nomeCompleto";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        
+        ArrayList listarClientes = new ArrayList();
+        while(rs.next()){
+            Cliente cliente = new Cliente();
+            cliente.setIdCliente(rs.getInt("id_cliente"));
+            cliente.setNomeCompleto(rs.getString("nomeCompleto"));
+            cliente.setCpfCnpj(rs.getString("cpfCnpj"));
+            cliente.setIdade(rs.getInt("idade"));
+            cliente.setPessoaFisica(rs.getBoolean("pessoaFisica"));
+            listarClientes.add(cliente);
+        }
+        return listarClientes;
+    }
+    
+    @Override
+    public Cliente recuperar(int idCliente) throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM cliente WHERE id_cliente=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setInt(1, idCliente);
+        ResultSet rs = ps.executeQuery();
+       
+        Cliente cliente = new Cliente();
+        if(rs.next()){
+            cliente.setIdCliente(rs.getInt("id_cliente"));
+            cliente.setNomeCompleto(rs.getString("nomeCompleto"));
+            cliente.setCpfCnpj(rs.getString("cpfCnpj"));
+            cliente.setIdade(rs.getInt("idade"));
+            cliente.setPessoaFisica(rs.getBoolean("pessoaFisica"));
+        }
+        return cliente;
+    }
+}

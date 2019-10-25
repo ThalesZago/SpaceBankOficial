@@ -5,17 +5,65 @@
  */
 package GUI;
 
+import DAO.ClienteDAO;
+import POO.Cliente;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author UserSoffti
  */
 public class spaceCadastro extends javax.swing.JFrame {
-
+    
+    private Cliente cliente = null;
+    private ClienteDAO clienteDAO = new ClienteDAO();
+        
     /**
      * Creates new form spaceCadastro
      */
     public spaceCadastro() {
         initComponents();
+    }
+    
+     private boolean validarFormulario(){
+          if(tfNomeCompleto.getText().trim().length() < 2){
+            JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta",
+            JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+          
+       if(tfIdade.getText().trim().length() < 2){
+            JOptionPane.showMessageDialog(this, "Idade inválida", "Alerta",
+            JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if(tfCpfCnpj.getText().trim().length() < 14){
+            JOptionPane.showMessageDialog(this, "CPF inválido", "Alerta",
+            JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if(tfEmail.getText().trim().length() < 10){
+            JOptionPane.showMessageDialog(this, "E-Mail inválido", "Alerta",
+            JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if(tfSenha.getPassword().length <  8 || tfSenha.getPassword().length > 16){
+            JOptionPane.showMessageDialog(this, "Senha deve conter entre 8 até 16 caracteres", "Alerta",
+            JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+          if(tfRepetirSenha.getPassword().length  <  8 || tfRepetirSenha.getPassword().length > 16){
+            JOptionPane.showMessageDialog(this, "Senha deve conter entre 8 até 16 caracteres", "Alerta",
+            JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if(!tfRepetirSenha.getPassword().equals(tfSenha.getPassword()) ){
+             JOptionPane.showMessageDialog(this, "Senhas não são compatíveis", "Alerta",
+            JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -27,19 +75,27 @@ public class spaceCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        tfIdade = new javax.swing.JFormattedTextField();
         tfCpfCnpj = new javax.swing.JFormattedTextField();
         tfSenha = new javax.swing.JPasswordField();
+        tfNomeCompleto = new javax.swing.JFormattedTextField();
         tfEmail = new javax.swing.JFormattedTextField();
+        tfRepetirSenha = new javax.swing.JPasswordField();
+        tipoCorrente = new javax.swing.JRadioButton();
+        tipoPoupanca = new javax.swing.JRadioButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        tfEndereco = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JPanel();
-        lblCadastrar = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,86 +107,155 @@ public class spaceCadastro extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("CPF/CNPJ:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 110, -1));
+        jLabel5.setText("IDADE:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 140, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("SENHA:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 90, -1));
+        jLabel4.setText("TIPO DE CONTA:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 140, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("CPF/CNPJ:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 110, -1));
+
+        tfIdade.setBackground(new java.awt.Color(22, 22, 67));
+        tfIdade.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        tfIdade.setForeground(new java.awt.Color(255, 255, 255));
+        tfIdade.setOpaque(false);
+        getContentPane().add(tfIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 280, 30));
 
         tfCpfCnpj.setBackground(new java.awt.Color(22, 22, 67));
         tfCpfCnpj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
         tfCpfCnpj.setOpaque(false);
-        getContentPane().add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 280, 30));
+        getContentPane().add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 280, 30));
 
         tfSenha.setBackground(new java.awt.Color(22, 22, 67));
         tfSenha.setForeground(new java.awt.Color(255, 255, 255));
         tfSenha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfSenha.setOpaque(false);
-        getContentPane().add(tfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 280, 30));
+        getContentPane().add(tfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 280, 30));
+
+        tfNomeCompleto.setBackground(new java.awt.Color(22, 22, 67));
+        tfNomeCompleto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        tfNomeCompleto.setForeground(new java.awt.Color(255, 255, 255));
+        tfNomeCompleto.setOpaque(false);
+        getContentPane().add(tfNomeCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 280, 30));
 
         tfEmail.setBackground(new java.awt.Color(22, 22, 67));
         tfEmail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfEmail.setForeground(new java.awt.Color(255, 255, 255));
         tfEmail.setOpaque(false);
-        getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 280, 30));
+        getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 280, 30));
+
+        tfRepetirSenha.setBackground(new java.awt.Color(22, 22, 67));
+        tfRepetirSenha.setForeground(new java.awt.Color(255, 255, 255));
+        tfRepetirSenha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        tfRepetirSenha.setOpaque(false);
+        getContentPane().add(tfRepetirSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 280, 30));
+
+        tipoCorrente.setBackground(new java.awt.Color(21, 22, 68));
+        buttonGroup1.add(tipoCorrente);
+        tipoCorrente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tipoCorrente.setForeground(new java.awt.Color(255, 255, 255));
+        tipoCorrente.setSelected(true);
+        tipoCorrente.setText("Corrente");
+        getContentPane().add(tipoCorrente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
+
+        tipoPoupanca.setBackground(new java.awt.Color(21, 22, 68));
+        buttonGroup1.add(tipoPoupanca);
+        tipoPoupanca.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tipoPoupanca.setForeground(new java.awt.Color(255, 255, 255));
+        tipoPoupanca.setText("Poupança");
+        getContentPane().add(tipoPoupanca, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("NOME COMPL.");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 140, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("REPITIR SENHA:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 140, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("EMAIL:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 110, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 110, -1));
         jLabel6.getAccessibleContext().setAccessibleName("lblEmail");
-
-        tfEndereco.setBackground(new java.awt.Color(22, 22, 67));
-        tfEndereco.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfEndereco.setForeground(new java.awt.Color(255, 255, 255));
-        tfEndereco.setOpaque(false);
-        getContentPane().add(tfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 280, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("ENDEREÇO:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 110, -1));
+        jLabel7.setText("SENHA:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 110, -1));
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Cadastrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 150, 40));
 
         btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setForeground(new java.awt.Color(22, 22, 67));
+        btnCadastrar.setToolTipText("Cadastrar");
         btnCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        lblCadastrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblCadastrar.setForeground(new java.awt.Color(22, 22, 67));
-        lblCadastrar.setText("Cadastrar");
 
         javax.swing.GroupLayout btnCadastrarLayout = new javax.swing.GroupLayout(btnCadastrar);
         btnCadastrar.setLayout(btnCadastrarLayout);
         btnCadastrarLayout.setHorizontalGroup(
             btnCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnCadastrarLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lblCadastrar)
-                .addContainerGap(47, Short.MAX_VALUE))
+            .addGap(0, 150, Short.MAX_VALUE)
         );
         btnCadastrarLayout.setVerticalGroup(
             btnCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCadastrarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblCadastrar)
-                .addContainerGap())
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        getContentPane().add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 150, 40));
+        getContentPane().add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 150, 40));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(22, 22, 67));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/loginSPACEBANK.png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(479, 500));
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 500));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, -1));
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 478, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(validarFormulario()){
+            cliente.setNomeCompleto(tfNomeCompleto.getText().trim());
+            cliente.setCpfCnpj((String) tfCpfCnpj.getValue());
+            cliente.setIdade(Integer.parseInt(tfIdade.getText()));           
+            cliente.setSenha(tfSenha.getPassword().toString());
+            
+            if(cliente.getIdCliente()== 0){
+                try{
+                    clienteDAO.inserir(cliente);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(this, "Erro ao inserir cliente."
+                    + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                try{
+                    clienteDAO.alterar(cliente);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(this, "Erro ao alterar cliente."
+                    + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,17 +294,25 @@ public class spaceCadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCadastrar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblCadastrar;
     private javax.swing.JFormattedTextField tfCpfCnpj;
     private javax.swing.JFormattedTextField tfEmail;
-    private javax.swing.JFormattedTextField tfEndereco;
+    private javax.swing.JFormattedTextField tfIdade;
+    private javax.swing.JFormattedTextField tfNomeCompleto;
+    private javax.swing.JPasswordField tfRepetirSenha;
     private javax.swing.JPasswordField tfSenha;
+    private javax.swing.JRadioButton tipoCorrente;
+    private javax.swing.JRadioButton tipoPoupanca;
     // End of variables declaration//GEN-END:variables
 }
