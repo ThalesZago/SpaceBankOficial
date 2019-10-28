@@ -17,4 +17,6 @@ public interface IDAOCliente<Tipo> {
     public ArrayList<Tipo> listarTodos() throws Exception;
     
     public Tipo recuperar(int idCliente) throws Exception;
+    
+    public Tipo getViaCpfCnpj(String cpfCnpj) throws Exception;
 }

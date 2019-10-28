@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import DAO.ContaDAO;
+import POO.Conta;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
@@ -14,6 +16,9 @@ import javax.swing.JOptionPane;
  */
 public class spaceDeleteAccount extends javax.swing.JFrame {
 
+        private Conta conta = null;
+        private ContaDAO contaDAO = new ContaDAO();
+        
     /**
      * Creates new form spaceDeleteAccount
      */
@@ -35,7 +40,7 @@ public class spaceDeleteAccount extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JPanel();
-        lblContinuar = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JPanel();
         lblCancelar = new javax.swing.JLabel();
         jpSenha = new javax.swing.JPasswordField();
@@ -69,15 +74,15 @@ public class spaceDeleteAccount extends javax.swing.JFrame {
         });
         btnConfirmar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblContinuar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblContinuar.setForeground(new java.awt.Color(51, 51, 51));
-        lblContinuar.setText("Confirmar");
-        lblContinuar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblContinuarMouseClicked(evt);
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jButton1.setText("Confirmar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
-        btnConfirmar.add(lblContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 0, -1, 30));
+        btnConfirmar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 30));
 
         jpDashboard.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 140, 30));
 
@@ -124,12 +129,6 @@ public class spaceDeleteAccount extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblContinuarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContinuarMouseClicked
-        JOptionPane.showMessageDialog(null, "Conta excluída com sucesso!");
-        spaceDeleteAccount sDelAcc = new spaceDeleteAccount();
-        sDelAcc.dispatchEvent(new WindowEvent(sDelAcc, WindowEvent.WINDOW_CLOSING));
-    }//GEN-LAST:event_lblContinuarMouseClicked
-
     private void btnConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarMouseClicked
         JOptionPane.showMessageDialog(null, "Cartão bloqueado temporariamente com sucesso!");
         spaceDeleteAccount sDelAcc = new spaceDeleteAccount();
@@ -145,6 +144,17 @@ public class spaceDeleteAccount extends javax.swing.JFrame {
         spaceDeleteAccount sDelAcc = new spaceDeleteAccount();
         sDelAcc.dispatchEvent(new WindowEvent(sDelAcc, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_btnCancelarMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            try{
+               contaDAO.excluir(conta); 
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(this, "Erro ao excluir conta."
+                    + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            }
+         spaceUserArea sUserArea = new spaceUserArea();
+         sUserArea.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +194,7 @@ public class spaceDeleteAccount extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCancelar;
     private javax.swing.JPanel btnConfirmar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -193,6 +204,5 @@ public class spaceDeleteAccount extends javax.swing.JFrame {
     private javax.swing.JPanel jpDashboard;
     private javax.swing.JPasswordField jpSenha;
     private javax.swing.JLabel lblCancelar;
-    private javax.swing.JLabel lblContinuar;
     // End of variables declaration//GEN-END:variables
 }

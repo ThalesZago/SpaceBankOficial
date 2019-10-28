@@ -6,29 +6,36 @@ package POO;
  * @author ellen.salicani
  */
 public class Cliente {
-    private int idCliente;
     private String nomeCompleto;
-    private int idade;
     private String cpfCnpj;
-    private boolean pessoaFisica;
     private String senha;
+    private String email;
+    private int idCliente;
+    private int idade;
+    private boolean pessoaFisica;
+
 
      //Construtor (iniciar os valor dos atriutos)
     public Cliente(){
-        this.idCliente = 0;
         this.nomeCompleto = "";
         this.cpfCnpj = "";
+        this.email = "";
+        this.senha = "";
+        this.idCliente = 0;
         this.idade = 0;
         this.pessoaFisica = false;
     }
     
     //Contrutor (obrigação de passar o codigo para trabalhar com o objeto)
     public Cliente(int idCliente){
-        this.idCliente = idCliente;
         this.nomeCompleto = "";
         this.cpfCnpj = "";
+        this.email = "";
+        this.senha = "";
+        this.idCliente = idCliente;
         this.idade = 0;
         this.pessoaFisica = false;
+
     }
     
     public String getNomeCompleto() {
@@ -77,6 +84,14 @@ public class Cliente {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

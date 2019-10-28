@@ -15,7 +15,7 @@ public class ClienteDAO implements IDAOCliente<Cliente>{
         //instancia da classe conexao
         Conexao c = new Conexao();
         //Define a query que será enviada para o banco de dados
-        String sql="INSERT INTO cliente (nomeCompleto, cpfCnpj, idade, pessoaFisica) VALUES (? ,? ,?)";
+        String sql="INSERT INTO cliente (nomeCompleto, cpfCnpj, idade, pessoaFisica, email, senha) VALUES (?, ?, ?, ?, ?, ?)";
         //Preparando o comando a ser enviado ao banco parssando como
         //parametro a query e a instancia da classe conexao
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
@@ -27,6 +27,10 @@ public class ClienteDAO implements IDAOCliente<Cliente>{
         ps.setInt(3, cliente.getIdade());
         //Definindo parametro 4 da query sql (?)
         ps.setBoolean(4, cliente.isPessoaFisica());
+        //Definindo parametro 5 da query sql (?)
+        ps.setString(5, cliente.getEmail());
+        //Definindo parametro 5 da query sql (?)
+        ps.setString(6, cliente.getSenha());
         //Executando o comando no banco de dados
         ps.execute();
         //Confirmação da classe conexao (Verificando se tudo funcionou 
@@ -37,13 +41,15 @@ public class ClienteDAO implements IDAOCliente<Cliente>{
     @Override
     public void alterar(Cliente cliente) throws Exception{
         Conexao c = new Conexao();
-        String sql="UPDATE cliente SET nomeCompleto=?, cpfCnpj=?, idade=?, pessoaFisica WHERE id_cliente=?";
+        String sql="UPDATE cliente SET nomeCompleto=?, cpfCnpj=?, idade=?, pessoaFisica=?, email=?, senha=? WHERE id_cliente=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setString(1, cliente.getNomeCompleto());
         ps.setString(2, cliente.getCpfCnpj());
         ps.setInt(3, cliente.getIdade());
         ps.setBoolean(4, cliente.isPessoaFisica());
-        ps.setInt(5, cliente.getIdCliente());
+        ps.setString(5, cliente.getEmail());
+        ps.setString(6, cliente.getSenha());
+        ps.setInt(7, cliente.getIdCliente());
         ps.execute();
         c.confirmar();
     }
@@ -73,6 +79,8 @@ public class ClienteDAO implements IDAOCliente<Cliente>{
             cliente.setCpfCnpj(rs.getString("cpfCnpj"));
             cliente.setIdade(rs.getInt("idade"));
             cliente.setPessoaFisica(rs.getBoolean("pessoaFisica"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setSenha(rs.getString("senha"));
             listarClientes.add(cliente);
         }
         return listarClientes;
@@ -93,6 +101,29 @@ public class ClienteDAO implements IDAOCliente<Cliente>{
             cliente.setCpfCnpj(rs.getString("cpfCnpj"));
             cliente.setIdade(rs.getInt("idade"));
             cliente.setPessoaFisica(rs.getBoolean("pessoaFisica"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setSenha(rs.getString("senha"));
+        }
+        return cliente;
+    }
+    
+    @Override
+    public Cliente getViaCpfCnpj(String cpfCnpj) throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM cliente WHERE cpfCnpj=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setString(1, cpfCnpj);
+        ResultSet rs = ps.executeQuery();
+       
+        Cliente cliente = new Cliente();
+        if(rs.next()){
+            cliente.setIdCliente(rs.getInt("id_cliente"));
+            cliente.setNomeCompleto(rs.getString("nomeCompleto"));
+            cliente.setCpfCnpj(rs.getString("cpfCnpj"));
+            cliente.setIdade(rs.getInt("idade"));
+            cliente.setPessoaFisica(rs.getBoolean("pessoaFisica"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setSenha(rs.getString("senha"));
         }
         return cliente;
     }

@@ -4,12 +4,19 @@
  * and open the template in the editor.
  */
 package GUI;
+import DAO.ClienteDAO;
 import GUI.ADM.spaceAlertAdm;
+import POO.Cliente;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 /**
  *
  * @author UserSoffti
  */
 public class spaceLogin extends javax.swing.JFrame {
+    
+        private Cliente cliente = null;
+        private ClienteDAO clienteDAO = new ClienteDAO();
 
     /**
      * Creates new form spaceLogin
@@ -17,6 +24,26 @@ public class spaceLogin extends javax.swing.JFrame {
     public spaceLogin() {
         initComponents();
     }
+    
+    private boolean validarFormulario(){
+         try{        
+            if(tfCpfCnpj.getText().trim().length() < 14){
+                JOptionPane.showMessageDialog(this, "CPF inválido", "Alerta",
+                JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+
+            if(tfSenha.getPassword().length <  6 || tfSenha.getPassword().length > 8){
+                JOptionPane.showMessageDialog(this, "Senha deve conter entre 6 até 8 caracteres", "Alerta",
+                JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+         return true;
+         } catch(Exception e){
+             JOptionPane.showMessageDialog(this, "Algo aconteceu" + e.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
+             return false;
+         }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,7 +63,7 @@ public class spaceLogin extends javax.swing.JFrame {
         tfCpfCnpj = new javax.swing.JFormattedTextField();
         tfSenha = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JPanel();
-        lblLogin = new javax.swing.JLabel();
+        btnLogar = new javax.swing.JButton();
         btnSair = new javax.swing.JPanel();
         lblSair = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -96,10 +123,16 @@ public class spaceLogin extends javax.swing.JFrame {
         });
         btnLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblLogin.setForeground(new java.awt.Color(22, 22, 67));
-        lblLogin.setText("Fazer Login");
-        btnLogin.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        btnLogar.setBackground(new java.awt.Color(255, 255, 255));
+        btnLogar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnLogar.setForeground(new java.awt.Color(22, 22, 67));
+        btnLogar.setText("Fazer Login");
+        btnLogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogarActionPerformed(evt);
+            }
+        });
+        btnLogin.add(btnLogar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
 
         jPanel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 150, 40));
 
@@ -217,7 +250,6 @@ public class spaceLogin extends javax.swing.JFrame {
     private void btnAreaADMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAreaADMMouseClicked
         spaceAlertAdm alertAdm = new spaceAlertAdm();
         alertAdm.setVisible(true);
-        
     }//GEN-LAST:event_btnAreaADMMouseClicked
 
     private void btnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSairMouseClicked
@@ -232,6 +264,22 @@ public class spaceLogin extends javax.swing.JFrame {
         spaceUserArea sUserArea = new spaceUserArea();
         sUserArea.setVisible(true);
     }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
+       if(validarFormulario()){            
+            if(tfCpfCnpj.getText() != ""){
+                try{
+                    clienteDAO.getViaCpfCnpj(tfCpfCnpj.getText());
+                    JOptionPane.showMessageDialog(this, "Login realizado com sucesso! Bem-vindo(a) " , "OK", JOptionPane.INFORMATION_MESSAGE);
+                    spaceUserArea sUserArea = new spaceUserArea();
+                    sUserArea.setVisible(true);
+                } catch(Exception e){
+                   JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."
+                    + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnLogarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,6 +318,7 @@ public class spaceLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAreaADM;
+    private javax.swing.JButton btnLogar;
     private javax.swing.JPanel btnLogin;
     private javax.swing.JPanel btnSair;
     private javax.swing.JLabel jLabel1;
@@ -281,7 +330,6 @@ public class spaceLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCadastroConta;
-    private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblLogin1;
     private javax.swing.JLabel lblSair;
     private javax.swing.JFormattedTextField tfCpfCnpj;

@@ -18,4 +18,8 @@ public interface IDAOConta<Tipo> {
     public void deposito(Tipo objeto) throws Exception;
     
     public void saque(Tipo objeto) throws Exception;
+    
+    public void saldo(Tipo objeto) throws Exception;
+    
+    public void extrato(Tipo objeto) throws Exception;
 }
