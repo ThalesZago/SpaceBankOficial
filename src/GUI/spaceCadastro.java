@@ -9,6 +9,8 @@ import DAO.ClienteDAO;
 import POO.Cliente;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -28,6 +30,9 @@ public class spaceCadastro extends javax.swing.JFrame {
     }
     
      private boolean validarFormulario(){
+         String senha1 = new String(tfSenha.getPassword());
+         String senha2 = new String(tfRepetirSenha.getPassword());
+         
          try{
             if(tfNomeCompleto.getText().trim().length() < 2){
               JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta",
@@ -61,15 +66,17 @@ public class spaceCadastro extends javax.swing.JFrame {
                   return false;
               }
                 
-           
-//        if (!(tfRepetirSenha.getPassword().equals(tfSenha.getPassword()))) {
-//                 JOptionPane.showMessageDialog(null, "Senhas não são compatíveis.", "Alerta", 
-//                 JOptionPane.ERROR_MESSAGE);
-//            return false;
-//        }   
+                if (!(senha2).equals(senha1)) {
+                    System.out.println(senha2);
+                    System.out.println(senha1);
+                    
+                         JOptionPane.showMessageDialog(null, "Senhas não são compatíveis.", "Alerta", 
+                         JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }   
          return true;
          } catch(Exception e){
-             JOptionPane.showMessageDialog(this, "Algo aconteceu" + e.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
+             JOptionPane.showMessageDialog(this, "Algo aconteceu: " + e.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
              return false;
          }
      }
@@ -259,8 +266,24 @@ public class spaceCadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
-        if(validarFormulario()){            
-            if(cliente.getIdCliente()== 0){
+        
+         String senha1 = new String(tfSenha.getPassword());
+         
+         if(validarFormulario()){           
+             try {
+                 System.out.println(clienteDAO.getAllViaCpfCnpj(tfCpfCnpj.getText()));
+             } catch (Exception ex) {
+                 Logger.getLogger(spaceCadastro.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             
+             //TO DO: VER COM O PROFESSOR O QUE TEM QUE FAZER AQUI 
+            if(!cliente.getCpfCnpj().contains(tfCpfCnpj.getText())){
+                cliente.setNomeCompleto(tfNomeCompleto.getText().trim());
+                cliente.setCpfCnpj((String) tfCpfCnpj.getValue());
+                cliente.setIdade(Integer.parseInt(tfIdade.getText()));  
+                cliente.setEmail(tfEmail.getText());
+                cliente.setSenha(senha1);
+                cliente.setPessoaFisica(btnGroupPfPj.isSelected(pessoaFisica.getModel()));
                 try{
                     clienteDAO.inserir(cliente);
                 }catch(Exception ex){
@@ -268,12 +291,9 @@ public class spaceCadastro extends javax.swing.JFrame {
                     + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
-                try{
-                    clienteDAO.alterar(cliente);
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(this, "Erro ao alterar cliente."
-                    + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-                }
+               
+                    JOptionPane.showMessageDialog(this, "Cliente já existe"
+                    + "\n" , "ERRO", JOptionPane.ERROR_MESSAGE);
             }
         }
         

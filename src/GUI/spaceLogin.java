@@ -269,7 +269,7 @@ public class spaceLogin extends javax.swing.JFrame {
        if(validarFormulario()){            
             if(tfCpfCnpj.getText() != ""){
                 try{
-                    clienteDAO.getViaCpfCnpj(tfCpfCnpj.getText());
+                    clienteDAO.getViaCpfCnpjSenha(tfCpfCnpj.getText(), tfSenha.getPassword().toString());
                     JOptionPane.showMessageDialog(this, "Login realizado com sucesso! Bem-vindo(a) " , "OK", JOptionPane.INFORMATION_MESSAGE);
                     spaceUserArea sUserArea = new spaceUserArea();
                     sUserArea.setVisible(true);

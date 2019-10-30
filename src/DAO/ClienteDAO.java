@@ -108,13 +108,35 @@ public class ClienteDAO implements IDAOCliente<Cliente>{
     }
     
     @Override
-    public Cliente getViaCpfCnpj(String cpfCnpj) throws Exception{
+    public Cliente getViaCpfCnpjSenha(String cpfCnpj, String senha) throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM cliente WHERE cpfCnpj=? and senha=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setString(1, cpfCnpj);
+        ps.setString(2, new String(senha));
+        ResultSet rs = ps.executeQuery();
+       
+        Cliente cliente = new Cliente();
+        if(rs.next()){
+            cliente.setIdCliente(rs.getInt("id_cliente"));
+            cliente.setNomeCompleto(rs.getString("nomeCompleto"));
+            cliente.setCpfCnpj(rs.getString("cpfCnpj"));
+            cliente.setIdade(rs.getInt("idade"));
+            cliente.setPessoaFisica(rs.getBoolean("pessoaFisica"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setSenha(rs.getString("senha"));
+        }
+        return cliente;
+    }
+
+    @Override
+    public Cliente getAllViaCpfCnpj(String cpfCnpj) throws Exception {
         Conexao c = new Conexao();
         String sql = "SELECT * FROM cliente WHERE cpfCnpj=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setString(1, cpfCnpj);
         ResultSet rs = ps.executeQuery();
-       
+        
         Cliente cliente = new Cliente();
         if(rs.next()){
             cliente.setIdCliente(rs.getInt("id_cliente"));
