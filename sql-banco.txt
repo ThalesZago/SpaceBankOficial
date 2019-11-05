@@ -1,0 +1,55 @@
+create database banco;
+use banco;
+
+create table if not exists cliente(
+	id_cliente int auto_increment,
+	nomeCompleto varchar(100),
+    idade int(2),
+    cpfCnpj varchar(14),
+    pessoaFisica bit,
+    primary key(id_cliente)	
+);
+
+create table if not exists gerente(
+	id_gerente int auto_increment,
+    cpf varchar(11),
+    nomeCompleto varchar(100),
+    primary key(id_gerente)
+);
+
+create table if not exists tipoConta(
+	id_tipoConta int auto_increment,
+    nome_tipo varchar(20),
+    primary key(id_tipoConta)
+);
+
+create table tipoTrancacoes(
+	id_transacao int auto_increment,
+    nome_transacao varchar(20),
+    primary key(id_transacao)
+);
+
+create table transacoes(
+	id_transacao int auto_increment,
+	localCompra varchar(255),
+    valorTotalCompra decimal(8,2),
+    id_tipoTransacao int,
+    primary key(id_transacao),
+    foreign key(id_tipoTransacao) references tipoTrancacoes(id_transacao)
+);
+
+create table if not exists conta(
+	id_conta int auto_increment,
+    agencia int,
+    contaCorrente int,
+    id_gerente int,
+    id_cliente int,
+    tipoConta int,
+	rendimentoDiario int,
+	id_transacao int,
+    primary key(id_conta),
+    foreign key(tipoConta) references tipoConta(id_tipoConta),
+    foreign key(id_cliente) references cliente(id_cliente),
+    foreign key(id_gerente) references gerente(id_gerente),
+    foreign key(id_transacao) references transacoes(id_transacao)
+);
