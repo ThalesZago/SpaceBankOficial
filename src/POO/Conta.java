@@ -7,6 +7,7 @@ package POO;
 
 public class Conta {
 
+    private int idConta;
     private int agencia;
     private int contaCorrente;
     private int idTipoConta;
@@ -14,6 +15,11 @@ public class Conta {
     private int idTransacao;
     private int idCliente;
     private int rendimentoDiario;     
+    private double saldo;
+    private String localCompra;
+    private double valorTotalCompra;
+    private int idTipoTransacao;
+    
 
     public int getAgencia() {
         return agencia;
@@ -69,5 +75,45 @@ public class Conta {
 
     public void setRendimentoDiario(int rendimentoDiario) {
         this.rendimentoDiario = rendimentoDiario;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public int getIdConta() {
+        return idConta;
+    }
+
+    public void setIdConta(int idConta) {
+        this.idConta = idConta;
+    }
+
+    public String getLocalCompra() {
+        return localCompra;
+    }
+
+    public double getValorTotalCompra() {
+        return valorTotalCompra;
+    }
+
+    public int getIdTipoTransacao() {
+        return idTipoTransacao;
+    }
+
+    public void setLocalCompra(String localCompra) {
+        this.localCompra = localCompra;
+    }
+
+    public void setValorTotalCompra(double valorTotalCompra) {
+        this.valorTotalCompra = valorTotalCompra;
+    }
+
+    public void setIdTipoTransacao(int idTipoTransacao) {
+        this.idTipoTransacao = idTipoTransacao;
     }
 }

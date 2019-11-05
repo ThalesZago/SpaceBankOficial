@@ -62,14 +62,11 @@ public class spaceLogin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tfCpfCnpj = new javax.swing.JFormattedTextField();
         tfSenha = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JPanel();
-        btnLogar = new javax.swing.JButton();
-        btnSair = new javax.swing.JPanel();
-        lblSair = new javax.swing.JLabel();
+        btnLogin = new keeptoo.KButton();
         jLabel8 = new javax.swing.JLabel();
         lblCadastroConta = new javax.swing.JLabel();
-        btnAreaADM = new javax.swing.JPanel();
-        lblLogin1 = new javax.swing.JLabel();
+        btnFinalizar = new keeptoo.KButton();
+        btnAreaAdm = new keeptoo.KButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,63 +110,20 @@ public class spaceLogin extends javax.swing.JFrame {
         tfSenha.setOpaque(false);
         jPanel2.add(tfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 330, 30));
 
-        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogin.setForeground(new java.awt.Color(22, 22, 67));
-        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLoginMouseClicked(evt);
-            }
-        });
-        btnLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnLogar.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnLogar.setForeground(new java.awt.Color(22, 22, 67));
-        btnLogar.setText("Fazer Login");
-        btnLogar.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Fazer Login");
+        btnLogin.setkBackGroundColor(new java.awt.Color(22, 22, 67));
+        btnLogin.setkBorderRadius(15);
+        btnLogin.setkEndColor(new java.awt.Color(22, 22, 67));
+        btnLogin.setkHoverEndColor(new java.awt.Color(22, 22, 67));
+        btnLogin.setkHoverForeGround(new java.awt.Color(22, 22, 67));
+        btnLogin.setkHoverStartColor(new java.awt.Color(181, 225, 244));
+        btnLogin.setkSelectedColor(new java.awt.Color(0, 153, 153));
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogarActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
-        btnLogin.add(btnLogar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
-
-        jPanel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 150, 40));
-
-        btnSair.setBackground(new java.awt.Color(255, 255, 255));
-        btnSair.setForeground(new java.awt.Color(22, 22, 67));
-        btnSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSairMouseClicked(evt);
-            }
-        });
-
-        lblSair.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblSair.setForeground(new java.awt.Color(22, 22, 67));
-        lblSair.setText("Finalizar");
-        lblSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblSair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblSairMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnSairLayout = new javax.swing.GroupLayout(btnSair);
-        btnSair.setLayout(btnSairLayout);
-        btnSairLayout.setHorizontalGroup(
-            btnSairLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnSairLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(lblSair)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-        btnSairLayout.setVerticalGroup(
-            btnSairLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(btnSair, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, 150, 40));
+        jPanel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 140, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,37 +142,35 @@ public class spaceLogin extends javax.swing.JFrame {
         });
         jPanel2.add(lblCadastroConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
 
-        btnAreaADM.setBackground(new java.awt.Color(255, 255, 255));
-        btnAreaADM.setForeground(new java.awt.Color(22, 22, 67));
-        btnAreaADM.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAreaADM.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAreaADMMouseClicked(evt);
+        btnFinalizar.setText("Finalizar");
+        btnFinalizar.setkBackGroundColor(new java.awt.Color(22, 22, 67));
+        btnFinalizar.setkBorderRadius(15);
+        btnFinalizar.setkEndColor(new java.awt.Color(22, 22, 67));
+        btnFinalizar.setkHoverEndColor(new java.awt.Color(22, 22, 67));
+        btnFinalizar.setkHoverForeGround(new java.awt.Color(22, 22, 67));
+        btnFinalizar.setkHoverStartColor(new java.awt.Color(181, 225, 244));
+        btnFinalizar.setkSelectedColor(new java.awt.Color(22, 22, 67));
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarActionPerformed(evt);
             }
         });
+        jPanel2.add(btnFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, 120, -1));
 
-        lblLogin1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblLogin1.setForeground(new java.awt.Color(22, 22, 67));
-        lblLogin1.setText("Área ADM");
-
-        javax.swing.GroupLayout btnAreaADMLayout = new javax.swing.GroupLayout(btnAreaADM);
-        btnAreaADM.setLayout(btnAreaADMLayout);
-        btnAreaADMLayout.setHorizontalGroup(
-            btnAreaADMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnAreaADMLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lblLogin1)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-        btnAreaADMLayout.setVerticalGroup(
-            btnAreaADMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnAreaADMLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblLogin1)
-                .addContainerGap())
-        );
-
-        jPanel2.add(btnAreaADM, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, -1, 40));
+        btnAreaAdm.setText("Área ADM");
+        btnAreaAdm.setkBackGroundColor(new java.awt.Color(22, 22, 67));
+        btnAreaAdm.setkEndColor(new java.awt.Color(22, 22, 67));
+        btnAreaAdm.setkHoverEndColor(new java.awt.Color(22, 22, 67));
+        btnAreaAdm.setkHoverForeGround(new java.awt.Color(22, 22, 67));
+        btnAreaAdm.setkHoverStartColor(new java.awt.Color(181, 225, 244));
+        btnAreaAdm.setkPressedColor(new java.awt.Color(181, 225, 244));
+        btnAreaAdm.setkSelectedColor(new java.awt.Color(22, 22, 67));
+        btnAreaAdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAreaAdmActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAreaAdm, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 530, 90, 20));
 
         jLabel2.setBackground(new java.awt.Color(22, 22, 67));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/backgroundSPACEBANKWithoutRocket.png"))); // NOI18N
@@ -247,39 +199,31 @@ public class spaceLogin extends javax.swing.JFrame {
         sc.setVisible(true);
     }//GEN-LAST:event_lblCadastroContaMouseClicked
 
-    private void btnAreaADMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAreaADMMouseClicked
-        spaceAlertAdm alertAdm = new spaceAlertAdm();
-        alertAdm.setVisible(true);
-    }//GEN-LAST:event_btnAreaADMMouseClicked
-
-    private void btnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSairMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_btnSairMouseClicked
-
-    private void lblSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSairMouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_lblSairMouseClicked
-
-    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        spaceUserArea sUserArea = new spaceUserArea();
-        sUserArea.setVisible(true);
-    }//GEN-LAST:event_btnLoginMouseClicked
-
-    private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
-       if(validarFormulario()){            
-            if(tfCpfCnpj.getText() != ""){
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        String senha = new String(tfSenha.getPassword());
+        if(validarFormulario()){
+            if(tfCpfCnpj.getText() != "" || senha  != ""){
                 try{
-                    clienteDAO.getViaCpfCnpjSenha(tfCpfCnpj.getText(), tfSenha.getPassword().toString());
+                    clienteDAO.getViaCpfCnpjSenha(tfCpfCnpj.getText(), senha);
                     JOptionPane.showMessageDialog(this, "Login realizado com sucesso! Bem-vindo(a) " , "OK", JOptionPane.INFORMATION_MESSAGE);
                     spaceUserArea sUserArea = new spaceUserArea();
                     sUserArea.setVisible(true);
                 } catch(Exception e){
-                   JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."
-                    + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."
+                        + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
-    }//GEN-LAST:event_btnLogarActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnAreaAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAreaAdmActionPerformed
+                spaceAlertAdm alertAdm = new spaceAlertAdm();
+                alertAdm.setVisible(true);
+    }//GEN-LAST:event_btnAreaAdmActionPerformed
+
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnFinalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,10 +261,9 @@ public class spaceLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnAreaADM;
-    private javax.swing.JButton btnLogar;
-    private javax.swing.JPanel btnLogin;
-    private javax.swing.JPanel btnSair;
+    private keeptoo.KButton btnAreaAdm;
+    private keeptoo.KButton btnFinalizar;
+    private keeptoo.KButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -330,8 +273,6 @@ public class spaceLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCadastroConta;
-    private javax.swing.JLabel lblLogin1;
-    private javax.swing.JLabel lblSair;
     private javax.swing.JFormattedTextField tfCpfCnpj;
     private javax.swing.JPasswordField tfSenha;
     // End of variables declaration//GEN-END:variables

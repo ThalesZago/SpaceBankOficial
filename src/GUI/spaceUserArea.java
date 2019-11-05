@@ -30,6 +30,7 @@ public class spaceUserArea extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuAcoes = new javax.swing.JMenu();
+        deposito = new javax.swing.JMenuItem();
         jMenuSaldo = new javax.swing.JMenuItem();
         jMenuTransferir = new javax.swing.JMenuItem();
         jMenuPagar = new javax.swing.JMenuItem();
@@ -41,6 +42,7 @@ public class spaceUserArea extends javax.swing.JFrame {
         jMenuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/spaceUserArea1280x720.png"))); // NOI18N
@@ -49,6 +51,15 @@ public class spaceUserArea extends javax.swing.JFrame {
         jMenuBar1.setOpaque(false);
 
         jMenuAcoes.setText("Ações");
+
+        deposito.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
+        deposito.setText("Depósito");
+        deposito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                depositoActionPerformed(evt);
+            }
+        });
+        jMenuAcoes.add(deposito);
 
         jMenuSaldo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         jMenuSaldo.setText("Consultar Saldo");
@@ -170,6 +181,11 @@ public class spaceUserArea extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuSairMouseClicked
 
+    private void depositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositoActionPerformed
+        spaceDeposito sDeposito = new spaceDeposito();
+        sDeposito.setVisible(true);
+    }//GEN-LAST:event_depositoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -206,6 +222,7 @@ public class spaceUserArea extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem deposito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenuAcoes;
     private javax.swing.JMenuBar jMenuBar1;
