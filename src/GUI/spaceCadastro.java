@@ -6,7 +6,9 @@
 package GUI;
 
 import DAO.ClienteDAO;
+import DAO.ContaDAO;
 import POO.Cliente;
+import POO.Conta;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
@@ -19,8 +21,10 @@ import javax.swing.JOptionPane;
  */
 public class spaceCadastro extends javax.swing.JFrame {
     
-    private Cliente cliente = null;
+    private Cliente cliente = new Cliente();
+    private Conta conta = new Conta();
     private ClienteDAO clienteDAO = new ClienteDAO();
+    private ContaDAO contaDAO = new ContaDAO();
         
     /**
      * Creates new form spaceCadastro
@@ -34,7 +38,7 @@ public class spaceCadastro extends javax.swing.JFrame {
          String senha2 = new String(tfRepetirSenha.getPassword());
          
          try{
-            if(tfNomeCompleto.getText().trim().length() < 2){
+            if(tfEmail.getText().trim().length() < 2){
               JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta",
               JOptionPane.WARNING_MESSAGE);
               return false;
@@ -95,10 +99,7 @@ public class spaceCadastro extends javax.swing.JFrame {
         cadastroTitulo = new javax.swing.JLabel();
         lblIdade = new javax.swing.JLabel();
         lblCpfCnpj = new javax.swing.JLabel();
-        tfCpfCnpj = new javax.swing.JFormattedTextField();
         tfSenha = new javax.swing.JPasswordField();
-        tfNomeCompleto = new javax.swing.JFormattedTextField();
-        tfEmail = new javax.swing.JFormattedTextField();
         tfRepetirSenha = new javax.swing.JPasswordField();
         tipoPoupanca = new javax.swing.JRadioButton();
         tipoCorrente = new javax.swing.JRadioButton();
@@ -106,8 +107,11 @@ public class spaceCadastro extends javax.swing.JFrame {
         pessoaFisica = new javax.swing.JRadioButton();
         tfIdade = new javax.swing.JFormattedTextField();
         lblTipoConta = new javax.swing.JLabel();
+        tfCpfCnpj = new javax.swing.JTextField();
         lblNomeCompleto = new javax.swing.JLabel();
         lblrepetirSenha = new javax.swing.JLabel();
+        tfNomeCompleto = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
@@ -133,12 +137,6 @@ public class spaceCadastro extends javax.swing.JFrame {
         lblCpfCnpj.setText("CPF/CNPJ:");
         getContentPane().add(lblCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 110, -1));
 
-        tfCpfCnpj.setBackground(new java.awt.Color(22, 22, 67));
-        tfCpfCnpj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
-        tfCpfCnpj.setOpaque(false);
-        getContentPane().add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 240, 30));
-
         tfSenha.setBackground(new java.awt.Color(22, 22, 67));
         tfSenha.setColumns(8);
         tfSenha.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,18 +144,6 @@ public class spaceCadastro extends javax.swing.JFrame {
         tfSenha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfSenha.setOpaque(false);
         getContentPane().add(tfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 160, 30));
-
-        tfNomeCompleto.setBackground(new java.awt.Color(22, 22, 67));
-        tfNomeCompleto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfNomeCompleto.setForeground(new java.awt.Color(255, 255, 255));
-        tfNomeCompleto.setOpaque(false);
-        getContentPane().add(tfNomeCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 340, 30));
-
-        tfEmail.setBackground(new java.awt.Color(22, 22, 67));
-        tfEmail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfEmail.setForeground(new java.awt.Color(255, 255, 255));
-        tfEmail.setOpaque(false);
-        getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 340, 30));
 
         tfRepetirSenha.setBackground(new java.awt.Color(22, 22, 67));
         tfRepetirSenha.setColumns(8);
@@ -205,6 +191,11 @@ public class spaceCadastro extends javax.swing.JFrame {
         lblTipoConta.setText("tipo de conta:");
         getContentPane().add(lblTipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 140, -1));
 
+        tfCpfCnpj.setBackground(new java.awt.Color(22, 22, 67));
+        tfCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
+        tfCpfCnpj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        getContentPane().add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 220, 30));
+
         lblNomeCompleto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNomeCompleto.setForeground(new java.awt.Color(255, 255, 255));
         lblNomeCompleto.setText("nome completo:");
@@ -214,6 +205,16 @@ public class spaceCadastro extends javax.swing.JFrame {
         lblrepetirSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblrepetirSenha.setText("repetir senha:");
         getContentPane().add(lblrepetirSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 140, -1));
+
+        tfNomeCompleto.setBackground(new java.awt.Color(22, 22, 67));
+        tfNomeCompleto.setForeground(new java.awt.Color(255, 255, 255));
+        tfNomeCompleto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        getContentPane().add(tfNomeCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 330, 30));
+
+        tfEmail.setBackground(new java.awt.Color(22, 22, 67));
+        tfEmail.setForeground(new java.awt.Color(255, 255, 255));
+        tfEmail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 330, 30));
 
         lblEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(255, 255, 255));
@@ -268,24 +269,31 @@ public class spaceCadastro extends javax.swing.JFrame {
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         
          String senha1 = new String(tfSenha.getPassword());
+         String cpfCnpj = tfCpfCnpj.getText();
+         String nome = tfNomeCompleto.getText();
+         String email = tfEmail.getText();
+         Boolean pfpj = pessoaFisica.isSelected();
          
-         if(validarFormulario()){           
-             try {
-                 System.out.println(clienteDAO.getAllViaCpfCnpj(tfCpfCnpj.getText()));
-             } catch (Exception ex) {
-                 Logger.getLogger(spaceCadastro.class.getName()).log(Level.SEVERE, null, ex);
-             }
-             
+         
+         if(validarFormulario()){   
              //TO DO: VER COM O PROFESSOR O QUE TEM QUE FAZER AQUI 
-            if(!cliente.getCpfCnpj().contains(tfCpfCnpj.getText())){
-                cliente.setNomeCompleto(tfNomeCompleto.getText().trim());
-                cliente.setCpfCnpj((String) tfCpfCnpj.getValue());
+            if(true){
+                System.out.println(cpfCnpj);
+                System.out.println(pfpj);
+                cliente.setCpfCnpj(cpfCnpj);
                 cliente.setIdade(Integer.parseInt(tfIdade.getText()));  
-                cliente.setEmail(tfEmail.getText());
+                cliente.setEmail(email);
                 cliente.setSenha(senha1);
-                cliente.setPessoaFisica(btnGroupPfPj.isSelected(pessoaFisica.getModel()));
+                cliente.setNomeCompleto(nome);
+                cliente.setPessoaFisica(pessoaFisica.isSelected());
                 try{
+                    
                     clienteDAO.inserir(cliente);
+//                    contaDAO.inserir(conta);
+                     JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso. Seja bem vindo(a)!"
+                    , "OK", JOptionPane.INFORMATION_MESSAGE);
+                     spaceUserArea sua = new spaceUserArea();
+                     sua.setVisible(true);
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(this, "Erro ao inserir cliente."
                     + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -351,10 +359,10 @@ public class spaceCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lblrepetirSenha;
     private javax.swing.JRadioButton pessoaFisica;
     private javax.swing.JRadioButton pessoaJuridica;
-    private javax.swing.JFormattedTextField tfCpfCnpj;
-    private javax.swing.JFormattedTextField tfEmail;
+    private javax.swing.JTextField tfCpfCnpj;
+    private javax.swing.JTextField tfEmail;
     private javax.swing.JFormattedTextField tfIdade;
-    private javax.swing.JFormattedTextField tfNomeCompleto;
+    private javax.swing.JTextField tfNomeCompleto;
     private javax.swing.JPasswordField tfRepetirSenha;
     private javax.swing.JPasswordField tfSenha;
     private javax.swing.JRadioButton tipoCorrente;
