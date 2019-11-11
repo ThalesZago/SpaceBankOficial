@@ -15,7 +15,7 @@ public interface IDAOConta<Tipo> {
     
     public void transfere(Tipo objeto) throws Exception;
     
-    public void deposito(Tipo objeto) throws Exception;
+    public void deposito(Tipo objeto, Tipo objeto2) throws Exception;
     
     public void saque(Tipo objeto) throws Exception;
     

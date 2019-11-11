@@ -5,36 +5,21 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import POO.Cliente;
 
-//Implementando Interface IDAO do TIPO Cliente
 
 public class ClienteDAO implements IDAOCliente<Cliente>{
     
-    //@Override: Sobrescrever o método PAI(Interface)
     @Override
     public void inserir(Cliente cliente) throws Exception{
-        //instancia da classe conexao
         Conexao c = new Conexao();
-        //Define a query que será enviada para o banco de dados
         String sql="INSERT INTO cliente (nomeCompleto, cpfCnpj, idade, pessoaFisica, email, senha) VALUES (?, ?, ?, ?, ?, ?)";
-        //Preparando o comando a ser enviado ao banco parssando como
-        //parametro a query e a instancia da classe conexao
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
-        //Definindo parametro 1 da query sql (?)
         ps.setString(1, cliente.getNomeCompleto());
-        //Definindo parametro 2 da query sql (?)
         ps.setString(2, cliente.getCpfCnpj());
-        //Definindo parametro 3 da query sql (?)
         ps.setInt(3, cliente.getIdade());
-        //Definindo parametro 4 da query sql (?)
         ps.setBoolean(4, cliente.isPessoaFisica());
-        //Definindo parametro 5 da query sql (?)
         ps.setString(5, cliente.getEmail());
-        //Definindo parametro 5 da query sql (?)
         ps.setString(6, cliente.getSenha());
-        //Executando o comando no banco de dados
         ps.execute();
-        //Confirmação da classe conexao (Verificando se tudo funcionou 
-        //execução da query)
         c.confirmar();
     }
     

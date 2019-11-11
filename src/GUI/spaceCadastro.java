@@ -70,6 +70,12 @@ public class spaceCadastro extends javax.swing.JFrame {
                   return false;
               }
                 
+              if(tipoCorrente.isSelected() == false && tipoPoupanca.isSelected() == false){
+                  JOptionPane.showMessageDialog(this, "Selecione o tipo de conta que quer criar", "Alerta",
+                  JOptionPane.WARNING_MESSAGE);
+                  return false;
+              }
+                
                 if (!(senha2).equals(senha1)) {
                     System.out.println(senha2);
                     System.out.println(senha1);
@@ -97,24 +103,28 @@ public class spaceCadastro extends javax.swing.JFrame {
         btnGroupTipoDeConta = new javax.swing.ButtonGroup();
         btnGroupPfPj = new javax.swing.ButtonGroup();
         cadastroTitulo = new javax.swing.JLabel();
-        lblIdade = new javax.swing.JLabel();
-        lblCpfCnpj = new javax.swing.JLabel();
         tfSenha = new javax.swing.JPasswordField();
         tfRepetirSenha = new javax.swing.JPasswordField();
-        tipoPoupanca = new javax.swing.JRadioButton();
-        tipoCorrente = new javax.swing.JRadioButton();
         pessoaJuridica = new javax.swing.JRadioButton();
         pessoaFisica = new javax.swing.JRadioButton();
-        tfIdade = new javax.swing.JFormattedTextField();
-        lblTipoConta = new javax.swing.JLabel();
-        tfCpfCnpj = new javax.swing.JTextField();
         lblNomeCompleto = new javax.swing.JLabel();
-        lblrepetirSenha = new javax.swing.JLabel();
         tfNomeCompleto = new javax.swing.JTextField();
         tfEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
+        lblCpfCnpj = new javax.swing.JLabel();
+        lblIdade = new javax.swing.JLabel();
+        tfCpfCnpj = new javax.swing.JTextField();
+        lblTipoConta = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
+        tipoCorrente = new javax.swing.JRadioButton();
+        lblrepetirSenha = new javax.swing.JLabel();
+        tipoPoupanca = new javax.swing.JRadioButton();
+        selectGerente = new javax.swing.JComboBox();
+        lblGerentes = new javax.swing.JLabel();
+        lblAgencias = new javax.swing.JLabel();
+        selectAgencia = new javax.swing.JComboBox();
+        tfIdade = new javax.swing.JFormattedTextField();
         btnCadastrar = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         bgTelaImg = new javax.swing.JLabel();
@@ -126,16 +136,6 @@ public class spaceCadastro extends javax.swing.JFrame {
         cadastroTitulo.setForeground(new java.awt.Color(255, 255, 255));
         cadastroTitulo.setText("Cadastro de Pessoas");
         getContentPane().add(cadastroTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
-
-        lblIdade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblIdade.setForeground(new java.awt.Color(255, 255, 255));
-        lblIdade.setText("idade:");
-        getContentPane().add(lblIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 70, 20));
-
-        lblCpfCnpj.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
-        lblCpfCnpj.setText("CPF/CNPJ:");
-        getContentPane().add(lblCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 110, -1));
 
         tfSenha.setBackground(new java.awt.Color(22, 22, 67));
         tfSenha.setColumns(8);
@@ -153,21 +153,6 @@ public class spaceCadastro extends javax.swing.JFrame {
         tfRepetirSenha.setOpaque(false);
         getContentPane().add(tfRepetirSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 170, 30));
 
-        tipoPoupanca.setBackground(new java.awt.Color(21, 22, 68));
-        btnGroupTipoDeConta.add(tipoPoupanca);
-        tipoPoupanca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tipoPoupanca.setForeground(new java.awt.Color(255, 255, 255));
-        tipoPoupanca.setText("Poupança");
-        getContentPane().add(tipoPoupanca, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, -1, -1));
-
-        tipoCorrente.setBackground(new java.awt.Color(21, 22, 68));
-        btnGroupTipoDeConta.add(tipoCorrente);
-        tipoCorrente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tipoCorrente.setForeground(new java.awt.Color(255, 255, 255));
-        tipoCorrente.setSelected(true);
-        tipoCorrente.setText("Corrente");
-        getContentPane().add(tipoCorrente, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, -1, -1));
-
         pessoaJuridica.setBackground(new java.awt.Color(21, 22, 68));
         btnGroupPfPj.add(pessoaJuridica);
         pessoaJuridica.setForeground(new java.awt.Color(255, 255, 255));
@@ -180,36 +165,15 @@ public class spaceCadastro extends javax.swing.JFrame {
         pessoaFisica.setText("Pessoa Física");
         getContentPane().add(pessoaFisica, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, -1));
 
-        tfIdade.setBackground(new java.awt.Color(22, 22, 67));
-        tfIdade.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfIdade.setForeground(new java.awt.Color(255, 255, 255));
-        tfIdade.setOpaque(false);
-        getContentPane().add(tfIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 90, 30));
-
-        lblTipoConta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblTipoConta.setForeground(new java.awt.Color(255, 255, 255));
-        lblTipoConta.setText("tipo de conta:");
-        getContentPane().add(lblTipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 140, -1));
-
-        tfCpfCnpj.setBackground(new java.awt.Color(22, 22, 67));
-        tfCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
-        tfCpfCnpj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        getContentPane().add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 220, 30));
-
         lblNomeCompleto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNomeCompleto.setForeground(new java.awt.Color(255, 255, 255));
         lblNomeCompleto.setText("nome completo:");
         getContentPane().add(lblNomeCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 130, -1));
 
-        lblrepetirSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblrepetirSenha.setForeground(new java.awt.Color(255, 255, 255));
-        lblrepetirSenha.setText("repetir senha:");
-        getContentPane().add(lblrepetirSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 140, -1));
-
         tfNomeCompleto.setBackground(new java.awt.Color(22, 22, 67));
         tfNomeCompleto.setForeground(new java.awt.Color(255, 255, 255));
         tfNomeCompleto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        getContentPane().add(tfNomeCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 330, 30));
+        getContentPane().add(tfNomeCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 200, 30));
 
         tfEmail.setBackground(new java.awt.Color(22, 22, 67));
         tfEmail.setForeground(new java.awt.Color(255, 255, 255));
@@ -227,6 +191,26 @@ public class spaceCadastro extends javax.swing.JFrame {
         lblSenha.setText("senha:");
         getContentPane().add(lblSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 110, -1));
 
+        lblCpfCnpj.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
+        lblCpfCnpj.setText("CPF/CNPJ:");
+        getContentPane().add(lblCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 110, -1));
+
+        lblIdade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblIdade.setForeground(new java.awt.Color(255, 255, 255));
+        lblIdade.setText("idade:");
+        getContentPane().add(lblIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 70, 20));
+
+        tfCpfCnpj.setBackground(new java.awt.Color(22, 22, 67));
+        tfCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
+        tfCpfCnpj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        getContentPane().add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 170, 30));
+
+        lblTipoConta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblTipoConta.setForeground(new java.awt.Color(255, 255, 255));
+        lblTipoConta.setText("tipo de conta:");
+        getContentPane().add(lblTipoConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 140, -1));
+
         btnCadastro.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastro.setText("Cadastrar");
         btnCadastro.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +219,50 @@ public class spaceCadastro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 130, 30));
+
+        tipoCorrente.setBackground(new java.awt.Color(21, 22, 68));
+        btnGroupTipoDeConta.add(tipoCorrente);
+        tipoCorrente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tipoCorrente.setForeground(new java.awt.Color(255, 255, 255));
+        tipoCorrente.setSelected(true);
+        tipoCorrente.setText("Corrente");
+        getContentPane().add(tipoCorrente, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, -1));
+
+        lblrepetirSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblrepetirSenha.setForeground(new java.awt.Color(255, 255, 255));
+        lblrepetirSenha.setText("repetir senha:");
+        getContentPane().add(lblrepetirSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 140, -1));
+
+        tipoPoupanca.setBackground(new java.awt.Color(21, 22, 68));
+        btnGroupTipoDeConta.add(tipoPoupanca);
+        tipoPoupanca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tipoPoupanca.setForeground(new java.awt.Color(255, 255, 255));
+        tipoPoupanca.setText("Poupança");
+        getContentPane().add(tipoPoupanca, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, -1, -1));
+
+        selectGerente.setForeground(new java.awt.Color(22, 22, 67));
+        selectGerente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Selecione seu gerente>", "Ellen Salicani", "Thales Zago", "Gregory Oliveira" }));
+        getContentPane().add(selectGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
+
+        lblGerentes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblGerentes.setForeground(new java.awt.Color(255, 255, 255));
+        lblGerentes.setText("gerente:");
+        getContentPane().add(lblGerentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 140, -1));
+
+        lblAgencias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblAgencias.setForeground(new java.awt.Color(255, 255, 255));
+        lblAgencias.setText("agencia:");
+        getContentPane().add(lblAgencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 140, -1));
+
+        selectAgencia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Selecione sua agencia>", "UNASP-HT", "UNASP-EC", "UNASP-SP" }));
+        getContentPane().add(selectAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, -1, -1));
+
+        tfIdade.setBackground(new java.awt.Color(22, 22, 67));
+        tfIdade.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        tfIdade.setForeground(new java.awt.Color(255, 255, 255));
+        tfIdade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        tfIdade.setOpaque(false);
+        getContentPane().add(tfIdade, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 120, 30));
 
         btnCadastrar.setBackground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setForeground(new java.awt.Color(22, 22, 67));
@@ -276,7 +304,6 @@ public class spaceCadastro extends javax.swing.JFrame {
          
          
          if(validarFormulario()){   
-             //TO DO: VER COM O PROFESSOR O QUE TEM QUE FAZER AQUI 
             if(true){
                 System.out.println(cpfCnpj);
                 System.out.println(pfpj);
@@ -286,20 +313,43 @@ public class spaceCadastro extends javax.swing.JFrame {
                 cliente.setSenha(senha1);
                 cliente.setNomeCompleto(nome);
                 cliente.setPessoaFisica(pessoaFisica.isSelected());
+                if(tipoCorrente.isSelected()){
+                    conta.setIdTipoConta(1);
+                } else{
+                    conta.setIdTipoConta(2);
+                }
+                if(selectAgencia.getSelectedItem().equals("UNASP-HT")){
+                    conta.setAgencia(1);
+                } else if(selectAgencia.getSelectedItem().equals("UNASP-EC")){
+                    conta.setAgencia(2);
+                } else if(selectAgencia.getSelectedItem().equals("UNASP-SP")){
+                    conta.setAgencia(3);
+                } else{
+                    JOptionPane.showMessageDialog(this, "Este item não é válido", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
+                
+                if(selectGerente.getSelectedItem().equals("Ellen Salicani")){
+                    conta.setIdGerente(1);
+                } else if(selectGerente.getSelectedItem().equals("Thales Zago")){
+                    conta.setIdGerente(2);
+                } else if(selectGerente.getSelectedItem().equals("Gregory Oliveira")){
+                    conta.setIdGerente(3);
+                } else{
+                    JOptionPane.showMessageDialog(this, "Este item não é válido", "Alerta", JOptionPane.WARNING_MESSAGE);
+                }
+                conta.setIdCliente(cliente.getIdCliente());
                 try{
-                    
                     clienteDAO.inserir(cliente);
-//                    contaDAO.inserir(conta);
-                     JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso. Seja bem vindo(a)!"
+                    contaDAO.inserir(conta);
+                     JOptionPane.showMessageDialog(this, "Conta criada com sucesso. Seja bem vindo(a)!"
                     , "OK", JOptionPane.INFORMATION_MESSAGE);
                      spaceUserArea sua = new spaceUserArea();
                      sua.setVisible(true);
                 }catch(Exception ex){
-                    JOptionPane.showMessageDialog(this, "Erro ao inserir cliente."
+                    JOptionPane.showMessageDialog(this, "Erro ao criar conta."
                     + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
-               
                     JOptionPane.showMessageDialog(this, "Cliente já existe"
                     + "\n" , "ERRO", JOptionPane.ERROR_MESSAGE);
             }
@@ -350,8 +400,10 @@ public class spaceCadastro extends javax.swing.JFrame {
     private javax.swing.ButtonGroup btnGroupTipoDeConta;
     private javax.swing.JLabel cadastroTitulo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAgencias;
     private javax.swing.JLabel lblCpfCnpj;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblGerentes;
     private javax.swing.JLabel lblIdade;
     private javax.swing.JLabel lblNomeCompleto;
     private javax.swing.JLabel lblSenha;
@@ -359,6 +411,8 @@ public class spaceCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lblrepetirSenha;
     private javax.swing.JRadioButton pessoaFisica;
     private javax.swing.JRadioButton pessoaJuridica;
+    private javax.swing.JComboBox selectAgencia;
+    private javax.swing.JComboBox selectGerente;
     private javax.swing.JTextField tfCpfCnpj;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JFormattedTextField tfIdade;

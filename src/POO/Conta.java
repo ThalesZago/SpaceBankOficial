@@ -15,7 +15,7 @@ public class Conta {
     private int idTransacao;
     private int idCliente;
     private int rendimentoDiario;     
-    private double saldo;
+    private float saldo;
     private String localCompra;
     private double valorTotalCompra;
     private int idTipoTransacao;
@@ -77,11 +77,11 @@ public class Conta {
         this.rendimentoDiario = rendimentoDiario;
     }
 
-    public double getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 

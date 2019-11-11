@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
  * @author ellen.salicani
  */
 public class spaceDeposito extends javax.swing.JFrame {
-    private final Conta conta = null;
-    private final Cliente cliente = null;
+    private final Conta conta = new Conta();
+    private final Cliente cliente = new Cliente();
     private final ContaDAO contaDAO = new ContaDAO();
     private final ClienteDAO clienteDAO = new ClienteDAO();
 
@@ -26,6 +26,8 @@ public class spaceDeposito extends javax.swing.JFrame {
      */
     public spaceDeposito() {
         initComponents();
+        String saldo = Float.toString(conta.getSaldo());
+        jLabel20.setText(saldo);
     }
 
     /**
@@ -47,8 +49,10 @@ public class spaceDeposito extends javax.swing.JFrame {
         nomeFavorecido = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         valorDeposito = new javax.swing.JFormattedTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        numConta = new javax.swing.JFormattedTextField();
         kButton1 = new keeptoo.KButton();
+        jLabel9 = new javax.swing.JLabel();
+        numAgencia = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,8 +77,8 @@ public class spaceDeposito extends javax.swing.JFrame {
         jpDashboard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 50, 30));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Data");
-        jpDashboard.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 50, 30));
+        jLabel8.setText("Número Conta");
+        jpDashboard.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 100, 30));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(153, 153, 153));
@@ -85,11 +89,11 @@ public class spaceDeposito extends javax.swing.JFrame {
         jLabel14.setText("Nome do Favorecido");
         jpDashboard.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 140, 30));
 
-        valorDeposito.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        valorDeposito.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jpDashboard.add(valorDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 140, 40));
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jpDashboard.add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 140, 40));
+        numConta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jpDashboard.add(numConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 90, 40));
 
         kButton1.setText("Depositar");
         kButton1.setkEndColor(new java.awt.Color(22, 22, 67));
@@ -103,6 +107,13 @@ public class spaceDeposito extends javax.swing.JFrame {
             }
         });
         jpDashboard.add(kButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 375, 130, 30));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Agência");
+        jpDashboard.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 50, 30));
+
+        numAgencia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jpDashboard.add(numAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 60, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/backgroundSPACEBANKWithoutRocket.png"))); // NOI18N
 
@@ -131,11 +142,26 @@ public class spaceDeposito extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void kButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton1ActionPerformed
+        Conta contaFavorecido = new Conta();
+        Conta conta = new Conta();
+
+        contaFavorecido.setAgencia((int) numAgencia.getValue());
+        contaFavorecido.setIdConta((int) numConta.getValue());
+        //verificar no banco se o id corresponde
+        conta.setIdTipoTransacao(8);
+        conta.setValorTotalCompra((double) valorDeposito.getValue());
+        conta.setSaldo(conta.getSaldo() - (float) valorDeposito.getValue());
+        contaFavorecido.setSaldo(contaFavorecido.getSaldo() + (float) valorDeposito.getValue());
         if(conta.getSaldo() <= 0){
             JOptionPane.showMessageDialog(this, "Saldo insuficiente", "Alerta",
                 JOptionPane.WARNING_MESSAGE);
         } else{
-            
+            try{
+                contaDAO.deposito(conta, contaFavorecido);
+                JOptionPane.showMessageDialog(this, "Deposito realizado com sucesso", "OK", JOptionPane.INFORMATION_MESSAGE);
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(this, "ERRO: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_kButton1ActionPerformed
 
@@ -175,7 +201,6 @@ public class spaceDeposito extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -184,9 +209,12 @@ public class spaceDeposito extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jpDashboard;
     private keeptoo.KButton kButton1;
     private javax.swing.JTextField nomeFavorecido;
+    private javax.swing.JFormattedTextField numAgencia;
+    private javax.swing.JFormattedTextField numConta;
     private javax.swing.JFormattedTextField valorDeposito;
     // End of variables declaration//GEN-END:variables
 }
