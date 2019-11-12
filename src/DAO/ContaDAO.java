@@ -7,6 +7,7 @@ package DAO;
 
 import POO.Conta;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -80,6 +81,25 @@ public class ContaDAO implements IDAOConta<Conta> {
     public void extrato(Conta objeto) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public Conta getViaIdCliente(int idCliente) throws Exception {
+        Conexao c = new Conexao();
+        String sql="select * from conta where id_cliente = ?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setInt(1, idCliente);
+        ResultSet rs = ps.executeQuery();
+       
+        Conta conta = new Conta();
+        if(rs.next()){
+            conta.setIdCliente(rs.getInt("id_cliente"));
+            conta.setAgencia(rs.getInt("id_agencia"));
+            conta.setContaCorrente(rs.getInt("numeroConta"));
+            conta.setIdGerente(rs.getInt("id_gerente"));
+            conta.setIdTipoConta(rs.getInt("tipoConta"));
+            conta.setSaldo((float) rs.getDouble("saldo"));
+        }
+        return conta;
+    }
     
 }

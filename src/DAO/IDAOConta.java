@@ -22,4 +22,6 @@ public interface IDAOConta<Tipo> {
     public void saldo(Tipo objeto) throws Exception;
     
     public void extrato(Tipo objeto) throws Exception;
+    
+    public Tipo getViaIdCliente(int objeto) throws Exception;
 }

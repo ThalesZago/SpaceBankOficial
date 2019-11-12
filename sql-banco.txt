@@ -1,55 +1,81 @@
-create database banco;
-use banco;
-
-create table if not exists cliente(
-	id_cliente int auto_increment,
-	nomeCompleto varchar(100),
-    idade int(2),
-    cpfCnpj varchar(14),
-    pessoaFisica bit,
-    primary key(id_cliente)	
+CREATE TABLE agencia (
+  id_agencia int(11) NOT NULL AUTO_INCREMENT,
+  nome_agencia varchar(20) DEFAULT NULL,
+  PRIMARY KEY (id_agencia)
 );
 
-create table if not exists gerente(
-	id_gerente int auto_increment,
-    cpf varchar(11),
-    nomeCompleto varchar(100),
-    primary key(id_gerente)
+CREATE TABLE cliente (
+  id_cliente int(11) NOT NULL AUTO_INCREMENT,
+  nomeCompleto varchar(100) DEFAULT NULL,
+  idade int(2) DEFAULT NULL,
+  cpfCnpj varchar(14) DEFAULT NULL,
+  pessoaFisica bit(1) DEFAULT NULL,
+  email varchar(100) DEFAULT NULL,
+  senha varchar(8) DEFAULT NULL,
+  PRIMARY KEY (id_cliente)
 );
 
-create table if not exists tipoConta(
-	id_tipoConta int auto_increment,
-    nome_tipo varchar(20),
-    primary key(id_tipoConta)
+CREATE TABLE gerente (
+  id_gerente int(11) NOT NULL AUTO_INCREMENT,
+  cpf varchar(11) DEFAULT NULL,
+  nomeCompleto varchar(100) DEFAULT NULL,
+  PRIMARY KEY (id_gerente)
 );
 
-create table tipoTrancacoes(
-	id_transacao int auto_increment,
-    nome_transacao varchar(20),
-    primary key(id_transacao)
+CREATE TABLE tipoconta (
+  id_tipoConta int(11) NOT NULL AUTO_INCREMENT,
+  nome_tipo varchar(20) DEFAULT NULL,
+  PRIMARY KEY (id_tipoConta)
 );
 
-create table transacoes(
-	id_transacao int auto_increment,
-	localCompra varchar(255),
-    valorTotalCompra decimal(8,2),
-    id_tipoTransacao int,
-    primary key(id_transacao),
-    foreign key(id_tipoTransacao) references tipoTrancacoes(id_transacao)
+CREATE TABLE tipotransacoes (
+  id_transacao int(11) NOT NULL AUTO_INCREMENT,
+  nome_transacao varchar(50) DEFAULT NULL,
+  PRIMARY KEY (id_transacao)
 );
 
-create table if not exists conta(
-	id_conta int auto_increment,
-    agencia int,
-    contaCorrente int,
-    id_gerente int,
-    id_cliente int,
-    tipoConta int,
-	rendimentoDiario int,
-	id_transacao int,
-    primary key(id_conta),
-    foreign key(tipoConta) references tipoConta(id_tipoConta),
-    foreign key(id_cliente) references cliente(id_cliente),
-    foreign key(id_gerente) references gerente(id_gerente),
-    foreign key(id_transacao) references transacoes(id_transacao)
+CREATE TABLE transacoes (
+  id_transacao int(11) NOT NULL AUTO_INCREMENT,
+  localCompra varchar(255) DEFAULT NULL,
+  valorTotalCompra decimal(8,2) DEFAULT NULL,
+  id_tipoTransacao int(11) DEFAULT NULL,
+  PRIMARY KEY (id_transacao),
+  foreign key(id_tipoTransacao) references tipotransacoes(id_transacao)
 );
+
+CREATE TABLE conta (
+  numeroConta int(11) NOT NULL AUTO_INCREMENT,
+  id_agencia int(11) DEFAULT NULL,
+  id_gerente int(11) DEFAULT NULL,
+  id_cliente int(11) DEFAULT NULL,
+  tipoConta int(11) DEFAULT NULL,
+  rendimentoDiario int(11) DEFAULT NULL,
+  id_transacao int(11) DEFAULT NULL,
+  saldo decimal(8,2) DEFAULT NULL,
+  PRIMARY KEY (numeroConta),
+  KEY id_agencia (id_agencia),
+  KEY tipoConta (tipoConta),
+  KEY id_cliente (id_cliente),
+  KEY id_gerente (id_gerente),
+  KEY id_transacao (id_transacao),
+  CONSTRAINT conta_ibfk_1 FOREIGN KEY (id_agencia) REFERENCES agencia (id_agencia),
+  CONSTRAINT conta_ibfk_2 FOREIGN KEY (tipoConta) REFERENCES tipoconta (id_tipoConta),
+  CONSTRAINT conta_ibfk_3 FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente),
+  CONSTRAINT conta_ibfk_4 FOREIGN KEY (id_gerente) REFERENCES gerente (id_gerente),
+  CONSTRAINT conta_ibfk_5 FOREIGN KEY (id_transacao) REFERENCES transacoes (id_transacao)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+insert into agencia(nome_agencia) values('UNASP-HT'),('UNASP-EC'),('UNASP-SP');
+
+insert into gerente(cpf, nomeCompleto) values('99988877754','Ellen Salicani'),('65544466677','Thales Zago'),('44433399900','Gregory Oliveira');
+
+insert into conta(id_agencia, id_gerente, id_cliente, tipoConta, saldo) values(1,2,1,1,260.50);
+
+insert into tipoconta(nome_tipo) values('Corrente'),('Poupança');
+
+INSERT INTO tipotransacoes (nome_transacao) VALUES 
+('Cartão Débito'),('Cartão Credito'),('Saque'),
+('Transferência'),('Depósito'),('Pagamento Caixa Eletrônico'),
+('Pagamento Internet Banking');
+

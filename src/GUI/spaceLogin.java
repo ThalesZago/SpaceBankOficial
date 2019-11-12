@@ -5,8 +5,10 @@
  */
 package GUI;
 import DAO.ClienteDAO;
+import DAO.ContaDAO;
 import GUI.ADM.spaceAlertAdm;
 import POO.Cliente;
+import POO.Conta;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 /**
@@ -15,8 +17,11 @@ import javax.swing.JOptionPane;
  */
 public class spaceLogin extends javax.swing.JFrame {
     
-        private Cliente cliente = null;
-        private ClienteDAO clienteDAO = new ClienteDAO();
+         Cliente cliente = new Cliente();
+         ClienteDAO clienteDAO = new ClienteDAO();
+         Conta conta = new Conta();
+         ContaDAO contaDAO = new ContaDAO();
+        
 
     /**
      * Creates new form spaceLogin
@@ -202,9 +207,25 @@ public class spaceLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String senha = new String(tfSenha.getPassword());
         if(validarFormulario()){
+            cliente.setCpfCnpj(tfCpfCnpj.getText());
             if(tfCpfCnpj.getText() != "" || senha  != ""){
                 try{
-                    clienteDAO.getViaCpfCnpjSenha(tfCpfCnpj.getText(), senha);
+                    cliente = clienteDAO.getViaCpfCnpjSenha(tfCpfCnpj.getText(), senha);
+                    int id = cliente.getIdCliente();
+                    if(true){
+                        try{
+                            conta = contaDAO.getViaIdCliente(id);
+                            conta.setIdCliente(id);
+                            conta.setAgencia(conta.getAgencia());
+                            conta.setContaCorrente(conta.getContaCorrente());
+                            conta.setSaldo(conta.getSaldo());
+                            conta.setIdGerente(conta.getIdGerente());
+                            
+                        } catch(Exception e){
+                            JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."
+                            + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                     JOptionPane.showMessageDialog(this, "Login realizado com sucesso! Bem-vindo(a) " , "OK", JOptionPane.INFORMATION_MESSAGE);
                     spaceUserArea sUserArea = new spaceUserArea();
                     sUserArea.setVisible(true);

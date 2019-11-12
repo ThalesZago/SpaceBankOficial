@@ -27,7 +27,7 @@ public class spaceDeposito extends javax.swing.JFrame {
     public spaceDeposito() {
         initComponents();
         String saldo = Float.toString(conta.getSaldo());
-        jLabel20.setText(saldo);
+        lblSaldo.setText(saldo);
     }
 
     /**
@@ -45,7 +45,7 @@ public class spaceDeposito extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
         nomeFavorecido = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         valorDeposito = new javax.swing.JFormattedTextField();
@@ -80,9 +80,9 @@ public class spaceDeposito extends javax.swing.JFrame {
         jLabel8.setText("Número Conta");
         jpDashboard.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 100, 30));
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(153, 153, 153));
-        jpDashboard.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 50, 20));
+        lblSaldo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblSaldo.setForeground(new java.awt.Color(153, 153, 153));
+        jpDashboard.add(lblSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 50, 20));
         jpDashboard.add(nomeFavorecido, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 220, 40));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -114,8 +114,6 @@ public class spaceDeposito extends javax.swing.JFrame {
 
         numAgencia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jpDashboard.add(numAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, 60, 40));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/backgroundSPACEBANKWithoutRocket.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,13 +203,13 @@ public class spaceDeposito extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jpDashboard;
     private keeptoo.KButton kButton1;
+    private javax.swing.JLabel lblSaldo;
     private javax.swing.JTextField nomeFavorecido;
     private javax.swing.JFormattedTextField numAgencia;
     private javax.swing.JFormattedTextField numConta;
