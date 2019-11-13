@@ -337,16 +337,23 @@ public class spaceCadastro extends javax.swing.JFrame {
                 } else{
                     JOptionPane.showMessageDialog(this, "Este item não é válido", "Alerta", JOptionPane.WARNING_MESSAGE);
                 }
-                conta.setIdCliente(cliente.getIdCliente());
+                
                 try{
                     clienteDAO.inserir(cliente);
-                    contaDAO.inserir(conta);
-                     JOptionPane.showMessageDialog(this, "Conta criada com sucesso. Seja bem vindo(a)!"
-                    , "OK", JOptionPane.INFORMATION_MESSAGE);
-                     spaceUserArea sua = new spaceUserArea();
-                     sua.setVisible(true);
+                    Cliente clienteCriado = clienteDAO.getLastRecord();
+                    try{
+                        conta.setIdCliente(clienteCriado.getIdCliente());
+                        contaDAO.inserir(conta);
+                        JOptionPane.showMessageDialog(this, "Conta criada com sucesso. Seja bem vindo(a)!"
+                        , "OK", JOptionPane.INFORMATION_MESSAGE);
+                        spaceUserArea sua = new spaceUserArea(cliente, conta);
+                        sua.setVisible(true);
+                    } catch(Exception e){
+                        JOptionPane.showMessageDialog(this, "Erro ao criar conta."
+                        + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                    }
                 }catch(Exception ex){
-                    JOptionPane.showMessageDialog(this, "Erro ao criar conta."
+                    JOptionPane.showMessageDialog(this, "Erro ao cadastrar cliente."
                     + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             }else{

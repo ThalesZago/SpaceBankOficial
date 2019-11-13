@@ -16,18 +16,25 @@ import javax.swing.JOptionPane;
  * @author ellen.salicani
  */
 public class spaceDeposito extends javax.swing.JFrame {
-    private final Conta conta = new Conta();
-    private final Cliente cliente = new Cliente();
+//    private final Conta conta = new Conta();
+//    private final Cliente cliente = new Cliente();
     private final ContaDAO contaDAO = new ContaDAO();
     private final ClienteDAO clienteDAO = new ClienteDAO();
+    Conta conta;
+    
 
     /**
      * Creates new form spaceDeposito
      */
-    public spaceDeposito() {
+    public spaceDeposito(Conta conta) {
         initComponents();
+        this.conta = conta;
         String saldo = Float.toString(conta.getSaldo());
         lblSaldo.setText(saldo);
+    }
+
+    private spaceDeposito() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -141,7 +148,6 @@ public class spaceDeposito extends javax.swing.JFrame {
 
     private void kButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton1ActionPerformed
         Conta contaFavorecido = new Conta();
-        Conta conta = new Conta();
 
         contaFavorecido.setAgencia((int) numAgencia.getValue());
         contaFavorecido.setIdConta((int) numConta.getValue());

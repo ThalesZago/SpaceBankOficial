@@ -19,11 +19,12 @@ public class ContaDAO implements IDAOConta<Conta> {
     @Override
     public void inserir(Conta conta) throws Exception {
          Conexao c = new Conexao();
-        String sql="INSERT INTO conta (id_cliente, id_gerente, tipoConta) VALUES (?, ?, ?)";
+        String sql="INSERT INTO conta (id_cliente, id_gerente, tipoConta, id_agencia) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setInt(1, conta.getIdCliente());
         ps.setInt(2, conta.getIdGerente());
         ps.setInt(3, conta.getIdTipoConta());
+        ps.setInt(4, conta.getAgencia());
         ps.execute();
         c.confirmar();
     }

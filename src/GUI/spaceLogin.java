@@ -227,7 +227,7 @@ public class spaceLogin extends javax.swing.JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(this, "Login realizado com sucesso! Bem-vindo(a) " , "OK", JOptionPane.INFORMATION_MESSAGE);
-                    spaceUserArea sUserArea = new spaceUserArea();
+                    spaceUserArea sUserArea = new spaceUserArea(cliente, conta);
                     sUserArea.setVisible(true);
                 } catch(Exception e){
                     JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."

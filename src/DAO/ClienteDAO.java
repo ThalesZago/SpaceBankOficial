@@ -134,4 +134,26 @@ public class ClienteDAO implements IDAOCliente<Cliente>{
         }
         return cliente;
     }
+
+    @Override
+    public Cliente getLastRecord() throws Exception {
+        Conexao c = new Conexao();
+        String sql = ("SELECT * FROM cliente ORDER BY id_cliente DESC LIMIT 1;");
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        
+        Cliente cliente = new Cliente();
+        if (rs.next()) {
+           cliente.setIdCliente(rs.getInt("id_cliente"));
+            cliente.setNomeCompleto(rs.getString("nomeCompleto"));
+            cliente.setCpfCnpj(rs.getString("cpfCnpj"));
+            cliente.setIdade(rs.getInt("idade"));
+            cliente.setPessoaFisica(rs.getBoolean("pessoaFisica"));
+            cliente.setEmail(rs.getString("email"));
+            cliente.setSenha(rs.getString("senha"));
+        }
+      return cliente;
+    }
+    
+    
 }

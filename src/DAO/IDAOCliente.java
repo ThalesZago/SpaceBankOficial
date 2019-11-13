@@ -21,4 +21,6 @@ public interface IDAOCliente<Tipo> {
     public Tipo getViaCpfCnpjSenha(String cpfCnpj, String senha) throws Exception;
     
     public Tipo getAllViaCpfCnpj(String cpfCnpj) throws Exception;
+    
+    public Tipo getLastRecord() throws Exception;
 }

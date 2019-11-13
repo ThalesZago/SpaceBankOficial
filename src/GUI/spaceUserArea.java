@@ -5,17 +5,28 @@
  */
 package GUI;
 
+import POO.Cliente;
+import POO.Conta;
+
 /**
  *
  * @author UserSoffti
  */
 public class spaceUserArea extends javax.swing.JFrame {
 
+    Conta conta;
+    Cliente cliente;
     /**
      * Creates new form spaceUserArea
      */
-    public spaceUserArea() {
+    public spaceUserArea(Cliente cliente, Conta conta) {
         initComponents();
+        this.cliente = cliente;
+        this.conta = conta;
+    }
+
+    private spaceUserArea() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -182,7 +193,7 @@ public class spaceUserArea extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSairMouseClicked
 
     private void depositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositoActionPerformed
-        spaceDeposito sDeposito = new spaceDeposito();
+        spaceDeposito sDeposito = new spaceDeposito(conta);
         sDeposito.setVisible(true);
     }//GEN-LAST:event_depositoActionPerformed
 
