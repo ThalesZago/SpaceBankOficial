@@ -24,4 +24,6 @@ public interface IDAOConta<Tipo> {
     public void extrato(Tipo objeto) throws Exception;
     
     public Tipo getViaIdCliente(int objeto) throws Exception;
+    
+    public Tipo getViaNumeroConta(int numeroConta) throws Exception;
 }

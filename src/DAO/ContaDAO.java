@@ -52,9 +52,9 @@ public class ContaDAO implements IDAOConta<Conta> {
     @Override
     public void deposito(Conta conta, Conta favorecido) throws Exception {
         Conexao c = new Conexao();
-        String sql="INSERT INTO transacoes (localCompra, valorTotalCompra, id_tipoTransacao, id_conta,) VALUES (?, ?, ?, ?); "
-                + "UPDATE conta set saldo = ? where id_conta = ?;"
-                + "update conta set saldo = ? where id_conta = ?";
+        String sql="INSERT INTO transacoes (localCompra, valorTotalCompra, id_tipoTransacao, id_conta) VALUES (?, ?, ?, ?); "
+                + "UPDATE conta set saldo = ? where numeroConta = ?;"
+                + "update conta set saldo = ? where numeroConta = ?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setString(1, "Depósito");
         ps.setDouble(2, conta.getValorTotalCompra());
@@ -89,6 +89,26 @@ public class ContaDAO implements IDAOConta<Conta> {
         String sql="select * from conta where id_cliente = ?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setInt(1, idCliente);
+        ResultSet rs = ps.executeQuery();
+       
+        Conta conta = new Conta();
+        if(rs.next()){
+            conta.setIdCliente(rs.getInt("id_cliente"));
+            conta.setAgencia(rs.getInt("id_agencia"));
+            conta.setContaCorrente(rs.getInt("numeroConta"));
+            conta.setIdGerente(rs.getInt("id_gerente"));
+            conta.setIdTipoConta(rs.getInt("tipoConta"));
+            conta.setSaldo((float) rs.getDouble("saldo"));
+        }
+        return conta;
+    }
+
+    @Override
+    public Conta getViaNumeroConta(int numeroConta) throws Exception {
+        Conexao c = new Conexao();
+        String sql="select * from conta where numeroConta = ?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setInt(1, numeroConta);
         ResultSet rs = ps.executeQuery();
        
         Conta conta = new Conta();

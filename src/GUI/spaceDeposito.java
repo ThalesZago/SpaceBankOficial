@@ -57,7 +57,7 @@ public class spaceDeposito extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         valorDeposito = new javax.swing.JFormattedTextField();
         numConta = new javax.swing.JFormattedTextField();
-        kButton1 = new keeptoo.KButton();
+        btnDepositar = new keeptoo.KButton();
         jLabel9 = new javax.swing.JLabel();
         numAgencia = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -102,18 +102,18 @@ public class spaceDeposito extends javax.swing.JFrame {
         numConta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jpDashboard.add(numConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 90, 40));
 
-        kButton1.setText("Depositar");
-        kButton1.setkEndColor(new java.awt.Color(22, 22, 67));
-        kButton1.setkHoverEndColor(new java.awt.Color(22, 22, 67));
-        kButton1.setkHoverForeGround(new java.awt.Color(22, 22, 67));
-        kButton1.setkHoverStartColor(new java.awt.Color(255, 255, 255));
-        kButton1.setkSelectedColor(new java.awt.Color(22, 255, 189));
-        kButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDepositar.setText("Depositar");
+        btnDepositar.setkEndColor(new java.awt.Color(22, 22, 67));
+        btnDepositar.setkHoverEndColor(new java.awt.Color(22, 22, 67));
+        btnDepositar.setkHoverForeGround(new java.awt.Color(22, 22, 67));
+        btnDepositar.setkHoverStartColor(new java.awt.Color(255, 255, 255));
+        btnDepositar.setkSelectedColor(new java.awt.Color(22, 255, 189));
+        btnDepositar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kButton1ActionPerformed(evt);
+                btnDepositarActionPerformed(evt);
             }
         });
-        jpDashboard.add(kButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 375, 130, 30));
+        jpDashboard.add(btnDepositar, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 375, 130, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Agência");
@@ -146,28 +146,37 @@ public class spaceDeposito extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void kButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton1ActionPerformed
-        Conta contaFavorecido = new Conta();
-
-        contaFavorecido.setAgencia((int) numAgencia.getValue());
-        contaFavorecido.setIdConta((int) numConta.getValue());
-        //verificar no banco se o id corresponde
-        conta.setIdTipoTransacao(8);
-        conta.setValorTotalCompra((double) valorDeposito.getValue());
-        conta.setSaldo(conta.getSaldo() - (float) valorDeposito.getValue());
-        contaFavorecido.setSaldo(contaFavorecido.getSaldo() + (float) valorDeposito.getValue());
-        if(conta.getSaldo() <= 0){
-            JOptionPane.showMessageDialog(this, "Saldo insuficiente", "Alerta",
-                JOptionPane.WARNING_MESSAGE);
-        } else{
-            try{
-                contaDAO.deposito(conta, contaFavorecido);
-                JOptionPane.showMessageDialog(this, "Deposito realizado com sucesso", "OK", JOptionPane.INFORMATION_MESSAGE);
-            } catch(Exception e){
-                JOptionPane.showMessageDialog(this, "ERRO: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    private void btnDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositarActionPerformed
+        Conta contaFavorecido;
+        int cc = ((Long) numConta.getValue()).intValue();
+        double valorTotal = ((Long) valorDeposito.getValue()).doubleValue();
+        float valorDep = ((Long) valorDeposito.getValue()).floatValue();
+        try{
+            contaFavorecido = contaDAO.getViaNumeroConta(cc);
+            if(true){
+                conta.setLocalCompra("Depósito");
+                conta.setIdTipoTransacao(8);
+                conta.setValorTotalCompra(valorTotal);
+                conta.setSaldo(conta.getSaldo() - valorDep);
+                conta.setIdConta(conta.getContaCorrente());
+                contaFavorecido.setSaldo(contaFavorecido.getSaldo() + valorDep);
+                contaFavorecido.setIdConta(contaFavorecido.getContaCorrente());
+                if(conta.getSaldo() <= 0){
+                    JOptionPane.showMessageDialog(this, "Saldo insuficiente", "Alerta",
+                        JOptionPane.WARNING_MESSAGE);
+                } else{
+                    try{
+                        contaDAO.deposito(conta, contaFavorecido);
+                        JOptionPane.showMessageDialog(this, "Deposito realizado com sucesso", "OK", JOptionPane.INFORMATION_MESSAGE);
+                    } catch(Exception e){
+                        JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "ERRO: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_kButton1ActionPerformed
+    }//GEN-LAST:event_btnDepositarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,6 +214,7 @@ public class spaceDeposito extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private keeptoo.KButton btnDepositar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -214,7 +224,6 @@ public class spaceDeposito extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jpDashboard;
-    private keeptoo.KButton kButton1;
     private javax.swing.JLabel lblSaldo;
     private javax.swing.JTextField nomeFavorecido;
     private javax.swing.JFormattedTextField numAgencia;
