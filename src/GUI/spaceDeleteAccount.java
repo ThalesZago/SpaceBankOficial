@@ -6,6 +6,7 @@
 package GUI;
 
 import DAO.ContaDAO;
+import POO.Cliente;
 import POO.Conta;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
@@ -16,7 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class spaceDeleteAccount extends javax.swing.JFrame {
 
-        private Conta conta = null;
+        Conta conta;
+        Cliente cliente;
         private ContaDAO contaDAO = new ContaDAO();
         
     /**
@@ -152,7 +154,7 @@ public class spaceDeleteAccount extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao excluir conta."
                     + "\n" +ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             }
-         spaceUserArea sUserArea = new spaceUserArea();
+         spaceUserArea sUserArea = new spaceUserArea(cliente, conta);
          sUserArea.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

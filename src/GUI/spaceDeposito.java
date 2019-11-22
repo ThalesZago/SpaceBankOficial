@@ -168,6 +168,7 @@ public class spaceDeposito extends javax.swing.JFrame {
                     try{
                         contaDAO.deposito(conta, contaFavorecido);
                         JOptionPane.showMessageDialog(this, "Deposito realizado com sucesso", "OK", JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
                     } catch(Exception e){
                         JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     }

@@ -51,21 +51,30 @@ public class ContaDAO implements IDAOConta<Conta> {
 
     @Override
     public void deposito(Conta conta, Conta favorecido) throws Exception {
-        Conexao c = new Conexao();
-        String sql="INSERT INTO transacoes (localCompra, valorTotalCompra, id_tipoTransacao, id_conta) VALUES (?, ?, ?, ?); "
-                + "UPDATE conta set saldo = ? where numeroConta = ?;"
-                + "update conta set saldo = ? where numeroConta = ?";
+        Conexao c = new Conexao();        
+        String sql="INSERT INTO transacoes (localCompra, valorTotalCompra, id_tipoTransacao) VALUES (?, ?, ?)";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setString(1, "Depósito");
         ps.setDouble(2, conta.getValorTotalCompra());
         ps.setInt(3, conta.getIdTipoTransacao());
-        ps.setInt(4, conta.getIdConta());
-        ps.setFloat(5, conta.getSaldo());
-        ps.setInt(6, conta.getIdConta());
-        ps.setFloat(7, favorecido.getSaldo());
-        ps.setInt(8, favorecido.getIdConta());
         ps.execute();
         c.confirmar();
+        
+        Conexao c1 = new Conexao();
+        String sql1 = "UPDATE conta set saldo = ? where numeroConta = ?";
+        PreparedStatement ps1 = c1.getConexao().prepareStatement(sql1);
+        ps1.setFloat(1, conta.getSaldo());
+        ps1.setInt(2, conta.getIdConta());
+        ps1.execute();
+        c1.confirmar();
+        
+        Conexao c2 = new Conexao();
+        String sql2 = "update conta set saldo = ? where numeroConta = ?";
+        PreparedStatement ps2 = c2.getConexao().prepareStatement(sql2);
+        ps2.setFloat(1, favorecido.getSaldo());
+        ps2.setInt(2, favorecido.getIdConta());
+        ps2.execute();
+        c2.confirmar();
     }
 
     @Override
