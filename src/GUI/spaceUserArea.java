@@ -159,7 +159,7 @@ public class spaceUserArea extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSobreMouseClicked
 
     private void jMenuSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSaldoActionPerformed
-        spaceBalance sBalance = new spaceBalance();
+        spaceBalance sBalance = new spaceBalance(conta,cliente);
         sBalance.setVisible(true);
     }//GEN-LAST:event_jMenuSaldoActionPerformed
 

@@ -38,7 +38,7 @@ public class spaceCadastro extends javax.swing.JFrame {
          String senha2 = new String(tfRepetirSenha.getPassword());
          
          try{
-            if(tfEmail.getText().trim().length() < 2){
+            if(tfNomeCompleto.getText().trim().length() < 2){
               JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta",
               JOptionPane.WARNING_MESSAGE);
               return false;
@@ -59,13 +59,13 @@ public class spaceCadastro extends javax.swing.JFrame {
                   JOptionPane.WARNING_MESSAGE);
                   return false;
               }
-              if(tfSenha.getPassword().length <  8 || tfSenha.getPassword().length > 16){
-                  JOptionPane.showMessageDialog(this, "Senha deve conter entre 8 até 16 caracteres", "Alerta",
+              if(tfSenha.getPassword().length <  6 || tfSenha.getPassword().length > 8){
+                  JOptionPane.showMessageDialog(this, "Senha deve conter entre 6 até 8 caracteres", "Alerta",
                   JOptionPane.WARNING_MESSAGE);
                   return false;
               }
-                if(tfRepetirSenha.getPassword().length  <  8 || tfRepetirSenha.getPassword().length > 16){
-                  JOptionPane.showMessageDialog(this, "Senha deve conter entre 8 até 16 caracteres", "Alerta",
+                if(tfRepetirSenha.getPassword().length  <  6 || tfRepetirSenha.getPassword().length > 8){
+                  JOptionPane.showMessageDialog(this, "Senha deve conter entre 6 até 8 caracteres", "Alerta",
                   JOptionPane.WARNING_MESSAGE);
                   return false;
               }

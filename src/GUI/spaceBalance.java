@@ -5,17 +5,32 @@
  */
 package GUI;
 
+import POO.Cliente;
+import POO.Conta;
+
 /**
  *
  * @author UserSoffti
  */
 public class spaceBalance extends javax.swing.JFrame {
 
+    Cliente cliente;
+    Conta conta;
     /**
      * Creates new form spaceBalance
      */
-    public spaceBalance() {
+    public spaceBalance(Conta conta, Cliente cliente) {
         initComponents();
+        this.conta = conta;
+        this.cliente = cliente;
+
+        String saldo = Float.toString(conta.getSaldo());
+        lblNome.setText(cliente.getNomeCompleto());
+        lblSaldoDisponivel.setText(saldo);
+    }
+
+    private spaceBalance() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -28,11 +43,11 @@ public class spaceBalance extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
         jpDashboard = new javax.swing.JPanel();
         lblExtrato = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblSaldoDisponivel = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -50,10 +65,9 @@ public class spaceBalance extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Gregory");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
+        lblNome.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
 
         jpDashboard.setBackground(new java.awt.Color(255, 255, 255));
         jpDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -74,9 +88,8 @@ public class spaceBalance extends javax.swing.JFrame {
         jLabel4.setText("Saldo disponível");
         jpDashboard.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel5.setText("R$ 1000,00");
-        jpDashboard.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        lblSaldoDisponivel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jpDashboard.add(lblSaldoDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
@@ -169,9 +182,7 @@ public class spaceBalance extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -179,5 +190,7 @@ public class spaceBalance extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jpDashboard;
     private javax.swing.JLabel lblExtrato;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblSaldoDisponivel;
     // End of variables declaration//GEN-END:variables
 }
