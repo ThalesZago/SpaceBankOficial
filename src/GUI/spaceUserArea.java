@@ -46,6 +46,7 @@ public class spaceUserArea extends javax.swing.JFrame {
         jMenuTransferir = new javax.swing.JMenuItem();
         jMenuPagar = new javax.swing.JMenuItem();
         jMenuCartaoVirtual = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuSeguranca = new javax.swing.JMenu();
         jMenuBloquearCartao = new javax.swing.JMenuItem();
         jMenuExcluirConta = new javax.swing.JMenuItem();
@@ -107,6 +108,15 @@ public class spaceUserArea extends javax.swing.JFrame {
             }
         });
         jMenuAcoes.add(jMenuCartaoVirtual);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem1.setText("Saque");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuAcoes.add(jMenuItem1);
 
         jMenuBar1.add(jMenuAcoes);
 
@@ -197,6 +207,11 @@ public class spaceUserArea extends javax.swing.JFrame {
         sDeposito.setVisible(true);
     }//GEN-LAST:event_depositoActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        spaceSaque sSaque = new spaceSaque();
+        sSaque.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,6 +255,7 @@ public class spaceUserArea extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuBloquearCartao;
     private javax.swing.JMenuItem jMenuCartaoVirtual;
     private javax.swing.JMenuItem jMenuExcluirConta;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuPagar;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenuItem jMenuSaldo;
