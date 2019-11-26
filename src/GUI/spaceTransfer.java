@@ -5,7 +5,10 @@
  */
 package GUI;
 
+import DAO.ContaDAO;
+import POO.Conta;
 import java.awt.event.WindowEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,11 +16,52 @@ import java.awt.event.WindowEvent;
  */
 public class spaceTransfer extends javax.swing.JFrame {
 
+    Conta conta;
+    ContaDAO contaDAO;
     /**
      * Creates new form spaceTransfer
      */
-    public spaceTransfer() {
+    public spaceTransfer(Conta conta) {
         initComponents();
+        this.conta = conta;
+        String saldo = Float.toString(conta.getSaldo());
+        lblSaldo.setText(saldo);
+    }
+
+    private spaceTransfer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private boolean validarFormulario(){
+       try{
+            if(tfNome.getText().trim().length() < 2){
+              JOptionPane.showMessageDialog(this, "Nome inválido", "Alerta",
+              JOptionPane.WARNING_MESSAGE);
+              return false;
+          }
+            if(tfCpf.getText().trim().length() < 14){
+                  JOptionPane.showMessageDialog(this, "CPF inválido", "Alerta",
+                  JOptionPane.WARNING_MESSAGE);
+                  return false;
+              }
+            
+            if(tfAgencia.getText().length() <= 0){
+                 JOptionPane.showMessageDialog(this, "Agencia inválida", "Alerta",
+                  JOptionPane.WARNING_MESSAGE);
+                  return false;
+            }
+            
+            if(tfConta.getText().length() <=0){
+                JOptionPane.showMessageDialog(this, "Conta corrente inválida", "Alerta",
+                  JOptionPane.WARNING_MESSAGE);
+                  return false;
+            }            
+                
+            return true;
+       } catch(Exception e){
+           JOptionPane.showMessageDialog(this, "Algo aconteceu: " + e.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
+             return false;
+       }
     }
 
     /**
@@ -43,10 +87,10 @@ public class spaceTransfer extends javax.swing.JFrame {
         tfConta = new javax.swing.JFormattedTextField();
         jLabel18 = new javax.swing.JLabel();
         tfValor = new javax.swing.JFormattedTextField();
-        btnContinuar = new javax.swing.JPanel();
-        lblContinuar = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JPanel();
-        lblCancelar = new javax.swing.JLabel();
+        kButton1 = new keeptoo.KButton();
+        kButton2 = new keeptoo.KButton();
+        jLabel2 = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -56,7 +100,7 @@ public class spaceTransfer extends javax.swing.JFrame {
         jpDashboard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel4.setText("Para quem deseja transferir?");
+        jLabel4.setText("Para quem deseja depositar?");
         jpDashboard.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -106,48 +150,23 @@ public class spaceTransfer extends javax.swing.JFrame {
         jLabel18.setText("Valor:");
         jpDashboard.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
-        tfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        tfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
         jpDashboard.add(tfValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 220, -1));
 
-        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnContinuar.addMouseListener(new java.awt.event.MouseAdapter() {
+        kButton1.setText("Depositar");
+        kButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnContinuarMouseClicked(evt);
+                kButton1MouseClicked(evt);
             }
         });
-        btnContinuar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpDashboard.add(kButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 140, 30));
 
-        lblContinuar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblContinuar.setForeground(new java.awt.Color(51, 51, 51));
-        lblContinuar.setText("Continuar");
-        lblContinuar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblContinuarMouseClicked(evt);
-            }
-        });
-        btnContinuar.add(lblContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 0, -1, 30));
+        kButton2.setText("Cancelar");
+        jpDashboard.add(kButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 130, 30));
 
-        jpDashboard.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 140, 30));
-
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelarMouseClicked(evt);
-            }
-        });
-        btnCancelar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblCancelar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblCancelar.setForeground(new java.awt.Color(51, 51, 51));
-        lblCancelar.setText("Cancelar");
-        lblCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCancelarMouseClicked(evt);
-            }
-        });
-        btnCancelar.add(lblCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 0, -1, 30));
-
-        jpDashboard.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 140, 30));
+        jLabel2.setText("Saldo:");
+        jpDashboard.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+        jpDashboard.add(lblSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 60, 20));
 
         getContentPane().add(jpDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 440, 470));
 
@@ -157,27 +176,19 @@ public class spaceTransfer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnContinuarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContinuarMouseClicked
-        spaceConfirmTransfer sConTransfer = new spaceConfirmTransfer();
-        sConTransfer.setVisible(true);
-    }//GEN-LAST:event_btnContinuarMouseClicked
-
-    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        spaceTransfer sTransfer = new spaceTransfer();
-        sTransfer.setVisible(false);
-        dispose();
-    }//GEN-LAST:event_btnCancelarMouseClicked
-
-    private void lblContinuarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContinuarMouseClicked
-        spaceConfirmTransfer sConTransfer = new spaceConfirmTransfer();
-        sConTransfer.setVisible(true);
-    }//GEN-LAST:event_lblContinuarMouseClicked
-
-    private void lblCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCancelarMouseClicked
-        spaceTransfer sTransfer = new spaceTransfer();
-        sTransfer.setVisible(false);
-        dispose();
-    }//GEN-LAST:event_lblCancelarMouseClicked
+    private void kButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kButton1MouseClicked
+        double valorTotal = ((Long) tfValor.getValue()).doubleValue();
+        if(validarFormulario()){
+            try{
+                
+                //TODO: Terminar
+                contaDAO.deposito(conta);
+                JOptionPane.showMessageDialog(this, "Depósito realizado com sucesso!", "OK", JOptionPane.INFORMATION_MESSAGE);
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Erro ao realizar depósito: " + e.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_kButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -215,8 +226,6 @@ public class spaceTransfer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnCancelar;
-    private javax.swing.JPanel btnContinuar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -225,10 +234,12 @@ public class spaceTransfer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jpDashboard;
-    private javax.swing.JLabel lblCancelar;
-    private javax.swing.JLabel lblContinuar;
+    private keeptoo.KButton kButton1;
+    private keeptoo.KButton kButton2;
+    private javax.swing.JLabel lblSaldo;
     private javax.swing.JFormattedTextField tfAgencia;
     private javax.swing.JFormattedTextField tfConta;
     private javax.swing.JFormattedTextField tfCpf;

@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
  *
  * @author ellen.salicani
  */
+
+//TROQUEI DEPOSITO POR TRANSFERENCIA E VICE VERSA
 public class spaceDeposito extends javax.swing.JFrame {
 //    private final Conta conta = new Conta();
 //    private final Cliente cliente = new Cliente();
@@ -73,7 +75,7 @@ public class spaceDeposito extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel12.setText("Realizar Depósito");
+        jLabel12.setText("Realizar Transferência");
         jpDashboard.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/rocketIcon40x40.png"))); // NOI18N
@@ -102,7 +104,7 @@ public class spaceDeposito extends javax.swing.JFrame {
         numConta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jpDashboard.add(numConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 90, 40));
 
-        btnDepositar.setText("Depositar");
+        btnDepositar.setText("Transferir");
         btnDepositar.setkEndColor(new java.awt.Color(22, 22, 67));
         btnDepositar.setkHoverEndColor(new java.awt.Color(22, 22, 67));
         btnDepositar.setkHoverForeGround(new java.awt.Color(22, 22, 67));
@@ -154,8 +156,8 @@ public class spaceDeposito extends javax.swing.JFrame {
         try{
             contaFavorecido = contaDAO.getViaNumeroConta(cc);
             if(true){
-                conta.setLocalCompra("Depósito");
-                conta.setIdTipoTransacao(8);
+                conta.setLocalCompra("Transferencia");
+                conta.setIdTipoTransacao(11);
                 conta.setValorTotalCompra(valorTotal);
                 conta.setSaldo(conta.getSaldo() - valorDep);
                 conta.setIdConta(conta.getContaCorrente());
@@ -166,8 +168,8 @@ public class spaceDeposito extends javax.swing.JFrame {
                         JOptionPane.WARNING_MESSAGE);
                 } else{
                     try{
-                        contaDAO.deposito(conta, contaFavorecido);
-                        JOptionPane.showMessageDialog(this, "Deposito realizado com sucesso", "OK", JOptionPane.INFORMATION_MESSAGE);
+                        contaDAO.transfere(conta, contaFavorecido);
+                        JOptionPane.showMessageDialog(this, "Transferencia realizada com sucesso", "OK", JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
                     } catch(Exception e){
                         JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

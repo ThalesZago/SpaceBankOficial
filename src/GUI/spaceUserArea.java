@@ -60,12 +60,10 @@ public class spaceUserArea extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/spaceUserArea1280x720.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
-        jMenuBar1.setOpaque(false);
-
         jMenuAcoes.setText("Ações");
 
-        deposito.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
-        deposito.setText("Depósito");
+        deposito.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        deposito.setText("Transferir");
         deposito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 depositoActionPerformed(evt);
@@ -82,8 +80,8 @@ public class spaceUserArea extends javax.swing.JFrame {
         });
         jMenuAcoes.add(jMenuSaldo);
 
-        jMenuTransferir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
-        jMenuTransferir.setText("Transferir");
+        jMenuTransferir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
+        jMenuTransferir.setText("Depositar");
         jMenuTransferir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuTransferirActionPerformed(evt);
@@ -174,7 +172,7 @@ public class spaceUserArea extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSaldoActionPerformed
 
     private void jMenuTransferirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTransferirActionPerformed
-        spaceTransfer sTransfer = new spaceTransfer();
+        spaceTransfer sTransfer = new spaceTransfer(conta);
         sTransfer.setVisible(true);
     }//GEN-LAST:event_jMenuTransferirActionPerformed
 
@@ -208,7 +206,7 @@ public class spaceUserArea extends javax.swing.JFrame {
     }//GEN-LAST:event_depositoActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        spaceSaque sSaque = new spaceSaque();
+        spaceSaque sSaque = new spaceSaque(conta, cliente);
         sSaque.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

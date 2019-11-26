@@ -30,8 +30,19 @@ public class ContaDAO implements IDAOConta<Conta> {
     }
 
     @Override
-    public void alterar(Conta objeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void alterar(Conta conta) throws Exception {
+        Conexao c = new Conexao();
+        String sql="UPDATE conta SET id_gerente=?, tipoConta=?, id_agencia=?, saldo=? WHERE id_cliente=?";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setInt(1, conta.getIdGerente());
+        ps.setInt(2, conta.getIdTipoConta());
+        ps.setInt(3, conta.getAgencia());
+        ps.setDouble(4, conta.getSaldo());
+        ps.setInt(5, conta.getIdCliente());
+        ps.execute();
+        c.confirmar();
+        
+        
     }
 
     @Override
@@ -45,16 +56,11 @@ public class ContaDAO implements IDAOConta<Conta> {
     }
 
     @Override
-    public void transfere(Conta objeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deposito(Conta conta, Conta favorecido) throws Exception {
+    public void transfere(Conta conta, Conta favorecido) throws Exception {
         Conexao c = new Conexao();        
         String sql="INSERT INTO transacoes (localCompra, valorTotalCompra, id_tipoTransacao) VALUES (?, ?, ?)";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
-        ps.setString(1, "Depósito");
+        ps.setString(1, "Transferencia");
         ps.setDouble(2, conta.getValorTotalCompra());
         ps.setInt(3, conta.getIdTipoTransacao());
         ps.execute();
@@ -78,8 +84,47 @@ public class ContaDAO implements IDAOConta<Conta> {
     }
 
     @Override
-    public void saque(Conta objeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deposito(Conta conta) throws Exception {
+         Conexao c = new Conexao();        
+        String sql="INSERT INTO transacoes (localCompra, valorTotalCompra, id_tipoTransacao) VALUES (?, ?, ?)";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setString(1, "Depósito");
+        ps.setDouble(2, conta.getValorTotalCompra());
+        ps.setInt(3, conta.getIdTipoTransacao());
+        ps.execute();
+        c.confirmar();
+        
+        Conexao c1 = new Conexao();
+        String sql1 = "UPDATE conta set saldo = ? where numeroConta = ?";
+        PreparedStatement ps1 = c1.getConexao().prepareStatement(sql1);
+        ps1.setFloat(1, conta.getSaldo());
+        ps1.setInt(2, conta.getIdConta());
+        ps1.execute();
+        c1.confirmar();
+        
+    }
+
+    @Override
+    public void saque(Conta conta) throws Exception {
+        Conexao c = new Conexao();        
+        String sql="INSERT INTO transacoes (localCompra, valorTotalCompra, id_tipoTransacao) VALUES (?, ?, ?)";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ps.setString(1, "Saque");
+        ps.setDouble(2, conta.getValorTotalCompra());
+        ps.setInt(3, conta.getIdTipoTransacao());
+        ps.execute();
+        c.confirmar();
+        
+        Conexao c1 = new Conexao();
+        String sql1="UPDATE conta SET id_gerente=?, tipoConta=?, id_agencia=?, saldo=? WHERE id_cliente=?";
+        PreparedStatement ps1 = c1.getConexao().prepareStatement(sql1);
+        ps1.setInt(1, conta.getIdGerente());
+        ps1.setInt(2, conta.getIdTipoConta());
+        ps1.setInt(3, conta.getAgencia());
+        ps1.setDouble(4, conta.getSaldo());
+        ps1.setInt(5, conta.getIdCliente());
+        ps1.execute();
+        c1.confirmar();
     }
 
     @Override
