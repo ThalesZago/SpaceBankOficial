@@ -159,7 +159,6 @@ public class spaceDeposito extends javax.swing.JFrame {
                 conta.setLocalCompra("Transferencia");
                 conta.setIdTipoTransacao(11);
                 conta.setValorTotalCompra(valorTotal);
-                conta.setSaldo(conta.getSaldo() - valorDep);
                 conta.setIdConta(conta.getContaCorrente());
                 contaFavorecido.setSaldo(contaFavorecido.getSaldo() + valorDep);
                 contaFavorecido.setIdConta(contaFavorecido.getContaCorrente());

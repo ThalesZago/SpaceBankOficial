@@ -217,12 +217,13 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="keeptoo.KButton" name="kButton1">
+        <Component class="keeptoo.KButton" name="btnDepositar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Depositar"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="kButton1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDepositarMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDepositarActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -230,7 +231,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="keeptoo.KButton" name="kButton2">
+        <Component class="keeptoo.KButton" name="btnCancelar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>

@@ -38,7 +38,7 @@ public class spaceAbout extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Developed by Ellen Salicani and Thales Zago");
+        jLabel2.setText("Developed by Ellen, Debora and Thales");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/spaceAbout.png"))); // NOI18N
