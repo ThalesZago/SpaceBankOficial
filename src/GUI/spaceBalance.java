@@ -60,6 +60,7 @@ public class spaceBalance extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(22, 22, 67));
+        setResizable(false);
         setSize(new java.awt.Dimension(600, 580));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -89,7 +90,7 @@ public class spaceBalance extends javax.swing.JFrame {
         jpDashboard.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         lblSaldoDisponivel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jpDashboard.add(lblSaldoDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jpDashboard.add(lblSaldoDisponivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));

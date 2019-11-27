@@ -5,8 +5,11 @@
  */
 package GUI.ADM;
 
+import DAO.AdminDAO;
+import POO.Admin;
 import java.awt.Frame;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,12 +17,35 @@ import javax.swing.JFrame;
  */
 public class spaceAlertAdm extends javax.swing.JFrame {
 
+    Admin admin = new Admin();
+    AdminDAO adminDAO = new AdminDAO();
+    
     /**
      * Creates new form spaceAlertAdm
      */
     public spaceAlertAdm() {
         initComponents();
     }
+    
+     private boolean validarFormulario(){
+         try{        
+            if(tfUsername.getText().trim().length() < 1){
+                JOptionPane.showMessageDialog(this, "Verifique seu username", "Alerta",
+                JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+
+            if(tfSenha.getPassword().length <  6 || tfSenha.getPassword().length > 8){
+                JOptionPane.showMessageDialog(this, "Senha deve conter entre 6 até 8 caracteres", "Alerta",
+                JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+         return true;
+         } catch(Exception e){
+             JOptionPane.showMessageDialog(this, "Algo aconteceu" + e.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
+             return false;
+         }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,11 +60,10 @@ public class spaceAlertAdm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btnLoginAdm = new keeptoo.KButton();
         jLabel6 = new javax.swing.JLabel();
-        tfCpfCnpj = new javax.swing.JFormattedTextField();
+        tfUsername = new javax.swing.JFormattedTextField();
         tfSenha = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JPanel();
-        lblLogin = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -61,41 +86,28 @@ public class spaceAlertAdm extends javax.swing.JFrame {
         jLabel5.setText("AdmCode:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 70, -1));
 
+        btnLoginAdm.setText("Fazer Login");
+        btnLoginAdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginAdmActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLoginAdm, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 215, 140, 30));
+
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Senha:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 50, -1));
 
-        tfCpfCnpj.setBackground(new java.awt.Color(22, 22, 67));
-        tfCpfCnpj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
-        tfCpfCnpj.setOpaque(false);
-        jPanel1.add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 220, 20));
+        tfUsername.setBackground(new java.awt.Color(22, 22, 67));
+        tfUsername.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
+        tfUsername.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(tfUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 220, 20));
 
         tfSenha.setBackground(new java.awt.Color(22, 22, 67));
         tfSenha.setForeground(new java.awt.Color(255, 255, 255));
         tfSenha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfSenha.setOpaque(false);
         jPanel1.add(tfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 220, 20));
-
-        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogin.setForeground(new java.awt.Color(22, 22, 67));
-        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLoginMouseClicked(evt);
-            }
-        });
-        btnLogin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblLogin.setForeground(new java.awt.Color(22, 22, 67));
-        lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLogin.setText("Fazer Login");
-        lblLogin.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnLogin.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 30));
-
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 120, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/IMG/backgroundSPACEBANKWithoutRocket.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -114,12 +126,23 @@ public class spaceAlertAdm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-       spaceAdmArea admArea = new spaceAdmArea();
-       admArea.setExtendedState(JFrame.MAXIMIZED_BOTH);
-       admArea.setVisible(true);
-       
-    }//GEN-LAST:event_btnLoginMouseClicked
+    private void btnLoginAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginAdmActionPerformed
+          String senha = new String(tfSenha.getPassword());
+        if(validarFormulario()){
+            admin.setUsername(tfUsername.getText());
+            if(tfUsername.getText() != "" || senha  != ""){
+                try{
+                    admin = adminDAO.getViaUsernameSenha(tfUsername.getText(), senha);
+                    JOptionPane.showMessageDialog(this, "Login realizado com sucesso! Bem-vindo(a) " , "OK", JOptionPane.INFORMATION_MESSAGE);
+                    spaceAdmArea sAdminArea = new spaceAdmArea(admin);
+                    sAdminArea.setVisible(true);
+                } catch(Exception e){
+                    JOptionPane.showMessageDialog(this, "Erro ao selecionar gerente."
+                        + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnLoginAdmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,15 +180,14 @@ public class spaceAlertAdm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnLogin;
+    private keeptoo.KButton btnLoginAdm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblLogin;
-    private javax.swing.JFormattedTextField tfCpfCnpj;
     private javax.swing.JPasswordField tfSenha;
+    private javax.swing.JFormattedTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 }

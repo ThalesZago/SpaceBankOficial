@@ -5,9 +5,11 @@
  */
 package DAO;
 
+import POO.Cliente;
 import POO.Conta;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,13 +34,14 @@ public class ContaDAO implements IDAOConta<Conta> {
     @Override
     public void alterar(Conta conta) throws Exception {
         Conexao c = new Conexao();
-        String sql="UPDATE conta SET id_gerente=?, tipoConta=?, id_agencia=?, saldo=? WHERE id_cliente=?";
+        String sql="UPDATE conta SET id_gerente=?, tipoConta=?, id_agencia=?, saldo=?, rendimentoDiario=? WHERE id_cliente=?";
         PreparedStatement ps = c.getConexao().prepareStatement(sql);
         ps.setInt(1, conta.getIdGerente());
         ps.setInt(2, conta.getIdTipoConta());
         ps.setInt(3, conta.getAgencia());
         ps.setDouble(4, conta.getSaldo());
-        ps.setInt(5, conta.getIdCliente());
+        ps.setInt(5, conta.getRendimentoDiario());
+        ps.setInt(6, conta.getIdCliente());
         ps.execute();
         c.confirmar();
         
@@ -101,7 +104,6 @@ public class ContaDAO implements IDAOConta<Conta> {
         ps1.setInt(2, conta.getIdConta());
         ps1.execute();
         c1.confirmar();
-        
     }
 
     @Override
@@ -146,6 +148,8 @@ public class ContaDAO implements IDAOConta<Conta> {
         ResultSet rs = ps.executeQuery();
        
         Conta conta = new Conta();
+        
+        System.out.println("antes if");
         if(rs.next()){
             conta.setIdCliente(rs.getInt("id_cliente"));
             conta.setAgencia(rs.getInt("id_agencia"));
@@ -153,6 +157,7 @@ public class ContaDAO implements IDAOConta<Conta> {
             conta.setIdGerente(rs.getInt("id_gerente"));
             conta.setIdTipoConta(rs.getInt("tipoConta"));
             conta.setSaldo((float) rs.getDouble("saldo"));
+            conta.setRendimentoDiario(rs.getInt("rendimentoDiario"));
         }
         return conta;
     }
@@ -173,8 +178,32 @@ public class ContaDAO implements IDAOConta<Conta> {
             conta.setIdGerente(rs.getInt("id_gerente"));
             conta.setIdTipoConta(rs.getInt("tipoConta"));
             conta.setSaldo((float) rs.getDouble("saldo"));
+            conta.setRendimentoDiario(rs.getInt("rendimentoDiario"));
+
         }
         return conta;
     }
     
+    @Override
+        public ArrayList<Conta> listarTodos() throws Exception{
+        Conexao c = new Conexao();
+        String sql = "SELECT * FROM conta";
+        PreparedStatement ps = c.getConexao().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        
+        ArrayList listarContas = new ArrayList();
+        while(rs.next()){
+            Conta conta = new Conta();
+            conta.setIdCliente(rs.getInt("id_cliente"));
+            conta.setAgencia(rs.getInt("id_agencia"));
+            conta.setContaCorrente(rs.getInt("numeroConta"));
+            conta.setIdGerente(rs.getInt("id_gerente"));
+            conta.setIdTipoConta(rs.getInt("tipoConta"));
+            conta.setSaldo((float) rs.getDouble("saldo"));
+            conta.setRendimentoDiario(rs.getInt("rendimentoDiario"));
+            listarContas.add(conta);
+        }
+        return listarContas;
+        }
+
 }

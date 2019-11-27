@@ -106,13 +106,11 @@ public class spaceLogin extends javax.swing.JFrame {
         tfCpfCnpj.setBackground(new java.awt.Color(22, 22, 67));
         tfCpfCnpj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
-        tfCpfCnpj.setOpaque(false);
         jPanel2.add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 330, 30));
 
         tfSenha.setBackground(new java.awt.Color(22, 22, 67));
         tfSenha.setForeground(new java.awt.Color(255, 255, 255));
         tfSenha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfSenha.setOpaque(false);
         jPanel2.add(tfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 330, 30));
 
         btnLogin.setText("Fazer Login");
@@ -214,12 +212,10 @@ public class spaceLogin extends javax.swing.JFrame {
                     int id = cliente.getIdCliente();
                     if(true){
                         try{
+                            System.out.println("id cliente: " + id);
                             conta = contaDAO.getViaIdCliente(id);
-                            conta.setIdCliente(id);
-                            conta.setAgencia(conta.getAgencia());
-                            conta.setContaCorrente(conta.getContaCorrente());
-                            conta.setSaldo(conta.getSaldo());
-                            conta.setIdGerente(conta.getIdGerente());
+                            
+                            System.out.println("saldo: " + conta.getSaldo());
                             
                         } catch(Exception e){
                             JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."

@@ -23,4 +23,5 @@ public interface IDAOCliente<Tipo> {
     public Tipo getAllViaCpfCnpj(String cpfCnpj) throws Exception;
     
     public Tipo getLastRecord() throws Exception;
+    
 }

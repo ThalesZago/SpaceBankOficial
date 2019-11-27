@@ -7,12 +7,17 @@ package GUI;
 
 import POO.Cliente;
 import POO.Conta;
+import POO.RendimentoDefaultListener;
+import POO.RendimentoTask;
+import java.util.Date;
+import java.util.Timer;
 
 /**
  *
  * @author UserSoffti
  */
 public class spaceUserArea extends javax.swing.JFrame {
+    private Timer timer = new Timer();
 
     Conta conta;
     Cliente cliente;
@@ -23,6 +28,13 @@ public class spaceUserArea extends javax.swing.JFrame {
         initComponents();
         this.cliente = cliente;
         this.conta = conta;
+        
+         timer.scheduleAtFixedRate(new RendimentoTask(new RendimentoDefaultListener(){
+            @Override
+            public void onRendimento(){
+                
+            }
+        }), new Date(), 30000);
     }
 
     private spaceUserArea() {
@@ -206,7 +218,7 @@ public class spaceUserArea extends javax.swing.JFrame {
     }//GEN-LAST:event_depositoActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        spaceSaque sSaque = new spaceSaque(conta, cliente);
+        spaceSaque sSaque = new spaceSaque(conta);
         sSaque.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 

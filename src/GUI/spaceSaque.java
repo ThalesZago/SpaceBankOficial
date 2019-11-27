@@ -24,10 +24,9 @@ public class spaceSaque extends javax.swing.JFrame {
     /**
      * Creates new form spaceSaque
      */
-    public spaceSaque(Conta conta, Cliente cliente) {
+    public spaceSaque(Conta conta) {
         initComponents();
         this.conta = conta;
-        this.cliente = cliente;
 
         String saldo = Float.toString(conta.getSaldo());
         lblSaldo.setText(saldo);
@@ -72,9 +71,9 @@ public class spaceSaque extends javax.swing.JFrame {
         jLabel4.setText("Quanto deseja sacar?");
 
         btnSacar.setText("Prosseguir");
-        btnSacar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSacarActionPerformed(evt);
+        btnSacar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSacarMouseClicked(evt);
             }
         });
 
@@ -146,20 +145,19 @@ public class spaceSaque extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacarActionPerformed
-        Conta contaFavorecido;
-        double valorTotal = ((Long) txtValorSaque.getValue()).doubleValue();
-        float valorSaque = ((Long) txtValorSaque.getValue()).floatValue();
-        try{
-            if(true){
+    private void btnSacarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSacarMouseClicked
+       float valorTotal = ((Long) txtValorSaque.getValue()).floatValue();
+       try{
                 conta.setLocalCompra("Saque");
                 conta.setIdTipoTransacao(10);
-                conta.setValorTotalCompra(valorTotal);
-                conta.setSaldo(conta.getSaldo() - valorSaque);
+                conta.setValorTotalCompra(Integer.parseInt(txtValorSaque.getText()));
+                conta.setSaldo(conta.getSaldo() - valorTotal);
                 conta.setIdConta(conta.getContaCorrente());
                 if(conta.getSaldo() <= 0){
-                    JOptionPane.showMessageDialog(this, "Saldo insuficiente", "Alerta",
+                    if(conta.getSaldo() < ((Long) txtValorSaque.getValue()).floatValue()){
+                       JOptionPane.showMessageDialog(this, "Saldo insuficiente para realizar saque.", "Alerta",
                         JOptionPane.WARNING_MESSAGE);
+                    }
                 } else{
                     try{
                         contaDAO.saque(conta);
@@ -169,11 +167,10 @@ public class spaceSaque extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            }
         } catch(Exception e){
             JOptionPane.showMessageDialog(this, "ERRO: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnSacarActionPerformed
+    }//GEN-LAST:event_btnSacarMouseClicked
 
     /**
      * @param args the command line arguments

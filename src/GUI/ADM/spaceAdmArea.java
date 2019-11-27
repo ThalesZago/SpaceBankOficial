@@ -6,19 +6,30 @@
 package GUI.ADM;
 import GUI.spaceAbout;
 import GUI.spaceCadastro;
+import POO.Admin;
+
 /**
  *
  * @author UserSoffti
  */
 public class spaceAdmArea extends javax.swing.JFrame {
 
+    Admin admin;
+    
     /**
      * Creates new form spaceAdmArea
      */
-    public spaceAdmArea() {
+    public spaceAdmArea(Admin admin) {
         initComponents();
+        this.admin = admin;
     }
 
+    private spaceAdmArea() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

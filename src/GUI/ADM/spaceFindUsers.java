@@ -5,7 +5,10 @@
  */
 package GUI.ADM;
 import DAO.ClienteDAO;
+import DAO.ContaDAO;
 import GUI.TM.ClienteTableModel;
+import POO.Cliente;
+import POO.Conta;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class spaceFindUsers extends javax.swing.JFrame {
 
+    ClienteDAO clienteDAO = new ClienteDAO();
+    ContaDAO contaDAO = new ContaDAO();
     /**
      * Creates new form spaceFindUsers
      */
@@ -67,9 +72,12 @@ public class spaceFindUsers extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setOpaque(false);
-
         jTable1.setModel(new ClienteTableModel());
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, 760, -1));
@@ -82,7 +90,6 @@ public class spaceFindUsers extends javax.swing.JFrame {
         tfEndereco.setBackground(new java.awt.Color(22, 22, 67));
         tfEndereco.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfEndereco.setForeground(new java.awt.Color(255, 255, 255));
-        tfEndereco.setOpaque(false);
         getContentPane().add(tfEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, 280, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -93,7 +100,6 @@ public class spaceFindUsers extends javax.swing.JFrame {
         tfAgencia.setBackground(new java.awt.Color(22, 22, 67));
         tfAgencia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfAgencia.setForeground(new java.awt.Color(255, 255, 255));
-        tfAgencia.setOpaque(false);
         getContentPane().add(tfAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 250, 280, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -104,7 +110,6 @@ public class spaceFindUsers extends javax.swing.JFrame {
         tfSenha.setBackground(new java.awt.Color(22, 22, 67));
         tfSenha.setForeground(new java.awt.Color(255, 255, 255));
         tfSenha.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
-        tfSenha.setOpaque(false);
         getContentPane().add(tfSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 280, 30));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -120,13 +125,11 @@ public class spaceFindUsers extends javax.swing.JFrame {
         tfUserId.setBackground(new java.awt.Color(22, 22, 67));
         tfUserId.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfUserId.setForeground(new java.awt.Color(255, 255, 255));
-        tfUserId.setOpaque(false);
         getContentPane().add(tfUserId, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 280, 30));
 
         tfCpfCnpj.setBackground(new java.awt.Color(22, 22, 67));
         tfCpfCnpj.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfCpfCnpj.setForeground(new java.awt.Color(255, 255, 255));
-        tfCpfCnpj.setOpaque(false);
         getContentPane().add(tfCpfCnpj, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, 280, 30));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -137,7 +140,6 @@ public class spaceFindUsers extends javax.swing.JFrame {
         tfEmail.setBackground(new java.awt.Color(22, 22, 67));
         tfEmail.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfEmail.setForeground(new java.awt.Color(255, 255, 255));
-        tfEmail.setOpaque(false);
         getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 280, 30));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -148,7 +150,6 @@ public class spaceFindUsers extends javax.swing.JFrame {
         tfConta.setBackground(new java.awt.Color(22, 22, 67));
         tfConta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white, java.awt.Color.white));
         tfConta.setForeground(new java.awt.Color(255, 255, 255));
-        tfConta.setOpaque(false);
         getContentPane().add(tfConta, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 290, 280, 30));
 
         btnExcluir.setBackground(new java.awt.Color(255, 255, 255));
@@ -182,6 +183,33 @@ public class spaceFindUsers extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        ClienteTableModel ctm = (ClienteTableModel) jTable1.getModel();
+        if(evt.getClickCount() == 2){
+            int linhaSelecionada = jTable1.convertRowIndexToModel(jTable1.getSelectedRow());
+            Cliente cliente = ctm.getRowValue(linhaSelecionada);
+            try{
+               clienteDAO.getViaCpfCnpjSenha(cliente.getCpfCnpj(), cliente.getSenha());
+               int id = cliente.getIdCliente();
+                    if(true){
+                        try{
+                            Conta conta = contaDAO.getViaIdCliente(id);
+                           if(true){
+                             spaceRendimento sRendimento = new spaceRendimento(cliente, conta);
+                          sRendimento.setVisible(true);
+                           }
+                        } catch(Exception e){
+                            JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."
+                            + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+            } catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Erro ao selecionar cliente."
+                            + "\n" +e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

@@ -1,6 +1,8 @@
 
 package DAO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ellen.salicani
@@ -26,4 +28,7 @@ public interface IDAOConta<Tipo> {
     public Tipo getViaIdCliente(int objeto) throws Exception;
     
     public Tipo getViaNumeroConta(int numeroConta) throws Exception;
+    
+    public ArrayList<Tipo> listarTodos() throws Exception;
+
 }

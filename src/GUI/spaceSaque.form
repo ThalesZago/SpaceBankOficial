@@ -150,7 +150,7 @@
             <Property name="text" type="java.lang.String" value="Prosseguir"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSacarActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSacarMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtValorSaque">
